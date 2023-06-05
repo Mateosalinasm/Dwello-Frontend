@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'Uncut Sans';
+    src: local('Uncut Sans),
+        url('./fonts/Uncut Sans.otf) format('otf');
+}

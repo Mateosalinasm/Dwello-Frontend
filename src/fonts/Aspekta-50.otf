@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'Aspekta-50';
+    src: local('Aspekta-50),
+        url('./fonts/Aspekta-50.otf) format('otf');
+}

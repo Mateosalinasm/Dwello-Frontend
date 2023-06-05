@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'Catchy Mager';
+    src: local('Catchy Mager),
+        url('./fonts/Catchy Mager Regular.ttf) format('ttf');
+}

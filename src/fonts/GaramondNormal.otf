@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'Garamond Normal';
+    src: local('Garamond Normal),
+        url('./fonts/Garamond Normal.otf) format('ttf');
+}
+

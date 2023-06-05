@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'Alumni Sans Pinstripe Regular';
+    src: local('AlumniSansPinstripe-Regular),
+        url('./fonts/AlumniSansPinstripe-Regular.otf) format('otf');
+}

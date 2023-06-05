@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'Garamond Light';
+    src: local('Garamond Light),
+        url('./fonts/Garamond Light.otf) format('ttf');
+}
