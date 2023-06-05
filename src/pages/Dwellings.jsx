@@ -1,28 +1,28 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Dwellings = () => {
-  // const [dwellings, setDwellings] = useState([]);
-  // // const dwellings = await prisma.property.findMany();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await prisma.property.findMany();
-  //       const data = await response.json();
-  //       setDwellings(data);
-  //     } catch (error) {
-  //       console.error("Error fetching dwellings data:", error);
-  //     }
-  //   };
+  const [dwellings, setDwellings] = useState([]);
 
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchDwellings = async () => {
+      try {
+        const response = await axios.get("http://localhost:4005/dwellings");
+        console.log("Response data:", response.data); 
+        setDwellings(response.data);
+      } catch (error) {
+        console.error("Error fetching dwellings data:", error);
+      }
+    };
 
+    fetchDwellings();
+  }, []);
 
   return (
     <div>
-      <h1>Dwellings</h1>
+      <h1>Dwellings!!!</h1>
       <ul>
-        {dwellings &&
+        {Array.isArray(dwellings) &&
           dwellings.map((dwelling) => (
             <li key={dwelling.id}>
               <h2>{dwelling.name}</h2>
