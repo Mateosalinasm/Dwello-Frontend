@@ -79,7 +79,6 @@ export default function Navbar() {
                     <Link
                       to="/dashboard"
                       onClick={() => window.scrollTo(0, 0)}
-                      href="dashboard"
                       className="inline-flex items-center border-b-2 border-amber-700 px-1 pt-1 text-sm font-medium text-amber-950"
                     >
                       Dashboard

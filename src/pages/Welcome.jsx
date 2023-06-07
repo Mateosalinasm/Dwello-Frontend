@@ -6,7 +6,7 @@ import '../fonts/fonts.css'
 const Welcome = () => {
   return (
     <div>
-      <div className="flex min-h-screen flex-col items-center justify-center ">
+      <div className="flex min-h-screen flex-col items-center justify-center "> 
         <video
           className="width"
           src="/videos/dwello welcome vid.mp4"

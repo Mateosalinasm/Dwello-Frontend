@@ -1,4 +1,3 @@
-"use client";
 
 import "./Colors.css";
 import React, { useEffect } from "react";

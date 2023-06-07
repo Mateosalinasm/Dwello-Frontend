@@ -1,8 +1,11 @@
-'use client'
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import Calendar from "./Calendar"
 
 const product = {
   name: "Zip Tote Basket",
@@ -55,7 +58,28 @@ function classNames(...classes) {
 }
 
 export default function Dwelling() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const { propertyId } = useParams();
+  const [ dwelling, setDwelling] = useState(null);
+
+  useEffect(() => {
+    const fetchDwelling = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4005/dwellings/${propertyId}`
+        );
+        setDwelling(response.data.data);
+      } catch (error) {
+        console.error("Error fetching property data:", error);
+      }
+    };
+
+    fetchDwelling();
+  }, [propertyId]);
+
+  if (!dwelling) {
+    return <div>Loading...</div>;
+  }
+
 
   return (
     <div className="bg-beige">
@@ -64,26 +88,26 @@ export default function Dwelling() {
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
             {/* Image selector */}
-            <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
+            <div className="mx-auto mt-6 w-full max-w-2xl sm:block lg:max-w-none">
               <Tab.List className="grid grid-cols-4 gap-6">
-                {product.images.map((image) => (
+                {dwelling.propertyImages.map((image, index) => (
                   <Tab
-                    key={image.id}
-                    className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-beige text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
+                    key={index}
+                    className="bg-beige relative flex h-24 cursor-pointer items-center justify-center rounded-md text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                   >
                     {({ selected }) => (
                       <>
-                        <span className="sr-only">{image.name}</span>
+                        <span className="sr-only">{dwelling.name}</span>
                         <span className="absolute inset-0 overflow-hidden rounded-md">
                           <img
-                            src={image.src}
+                            src={image}
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
                         </span>
                         <span
                           className={classNames(
-                            selected ? "ring-indigo-500" : "ring-transparent",
+                            selected ? "ring-amber-500" : "ring-transparent",
                             "pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2"
                           )}
                           aria-hidden="true"
@@ -94,13 +118,12 @@ export default function Dwelling() {
                 ))}
               </Tab.List>
             </div>
-
             <Tab.Panels className="aspect-h-1 aspect-w-1 w-full">
-              {product.images.map((image) => (
-                <Tab.Panel key={image.id}>
+              {dwelling.propertyImages.map((image, index) => (
+                <Tab.Panel key={index}>
                   <img
-                    src={image.src}
-                    alt={image.alt}
+                    src={image}
+                    alt={dwelling.name}
                     className="h-full w-full object-cover object-center sm:rounded-lg"
                   />
                 </Tab.Panel>
@@ -108,16 +131,16 @@ export default function Dwelling() {
             </Tab.Panels>
           </Tab.Group>
 
-          {/* Product info */}
+          {/* Property info */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              {product.name}
+            <h1 className="text-3xl font-bold tracking-tight text-amber-600">
+              {dwelling.name}
             </h1>
 
             <div className="mt-3">
-              <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight text-gray-900">
-                {product.price}
+              <h2 className="sr-only">Property information</h2>
+              <p className="text-3xl tracking-tight text-gray-600">
+                {dwelling.price}
               </p>
             </div>
 
@@ -131,7 +154,7 @@ export default function Dwelling() {
                       key={rating}
                       className={classNames(
                         product.rating > rating
-                          ? "text-indigo-500"
+                          ? "text-amber-500"
                           : "text-gray-300",
                         "h-5 w-5 flex-shrink-0"
                       )}
@@ -153,65 +176,12 @@ export default function Dwelling() {
             </div>
 
             <form className="mt-6">
-              {/* Colors */}
-              <div>
-                <h3 className="text-sm text-gray-600">Color</h3>
-
-                <RadioGroup
-                  value={selectedColor}
-                  onChange={setSelectedColor}
-                  className="mt-2"
-                >
-                  <RadioGroup.Label className="sr-only">
-                    Choose a color
-                  </RadioGroup.Label>
-                  <span className="flex items-center space-x-3">
-                    {product.colors.map((color) => (
-                      <RadioGroup.Option
-                        key={color.name}
-                        value={color}
-                        className={({ active, checked }) =>
-                          classNames(
-                            color.selectedColor,
-                            active && checked ? "ring ring-offset-1" : "",
-                            !active && checked ? "ring-2" : "",
-                            "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
-                          )
-                        }
-                      >
-                        <RadioGroup.Label as="span" className="sr-only">
-                          {color.name}
-                        </RadioGroup.Label>
-                        <span
-                          aria-hidden="true"
-                          className={classNames(
-                            color.bgColor,
-                            "h-8 w-8 rounded-full border border-black border-opacity-10"
-                          )}
-                        />
-                      </RadioGroup.Option>
-                    ))}
-                  </span>
-                </RadioGroup>
-              </div>
-
               <div className="mt-10 flex">
                 <button
                   type="submit"
-                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                  className="flex max-w-2xl flex-1 items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-3 text-base font-medium text-white hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
                 >
-                  Add to bag
-                </button>
-
-                <button
-                  type="button"
-                  className="ml-4 flex items-center justify-center rounded-md px-3 py-3 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
-                >
-                  <HeartIcon
-                    className="h-6 w-6 flex-shrink-0"
-                    aria-hidden="true"
-                  />
-                  <span className="sr-only">Add to favorites</span>
+                  Book
                 </button>
               </div>
             </form>
@@ -222,49 +192,53 @@ export default function Dwelling() {
               </h2>
 
               <div className="divide-y divide-gray-200 border-t">
-                {product.details.map((detail) => (
-                  <Disclosure as="div" key={detail.name}>
-                    {({ open }) => (
-                      <>
-                        <h3>
-                          <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
-                            <span
-                              className={classNames(
-                                open ? "text-indigo-600" : "text-gray-900",
-                                "text-sm font-medium"
-                              )}
-                            >
-                              {detail.name}
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon
-                                  className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusIcon
-                                  className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel
-                          as="div"
-                          className="prose prose-sm pb-6"
+                <Disclosure as="div" key={dwelling.name}>
+                  {({ open }) => (
+                    <>
+                      <h3>
+                        <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
+                          <span
+                            className={classNames(
+                              open ? "text-amber-600" : "text-gray-900",
+                              "text-sm font-medium"
+                            )}
+                          >
+                            Features
+                          </span>
+                          <span className="ml-6 flex items-center">
+                            {open ? (
+                              <MinusIcon
+                                className="block h-6 w-6 text-amber-400 group-hover:text-amber-500"
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <PlusIcon
+                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                aria-hidden="true"
+                              />
+                            )}
+                          </span>
+                        </Disclosure.Button>
+                      </h3>
+                      <Disclosure.Panel
+                        as="div"
+                        className="prose prose-sm pb-6"
+                      >
+                        <motion.ul
+                          initial={{ opacity: 0 }}
+                          whileInView={{ opacity: 1 }}
+                          transition={{ duration: 0.5 }}
+                          role="list"
                         >
-                          <ul role="list">
-                            {detail.items.map((item) => (
-                              <li key={item}>{item}</li>
-                            ))}
-                          </ul>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
+                          {dwelling.features.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </motion.ul>
+                      </Disclosure.Panel>
+                      <Calendar />
+                    </>
+                  )}
+                </Disclosure>
               </div>
             </section>
           </div>
