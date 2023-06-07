@@ -65,7 +65,7 @@ export default function Dwelling() {
     const fetchDwelling = async () => {
       try {
         const response = await axios.get(
-          `https://dwello-backend.vercel.app/api/dwellings/${propertyId}`
+          `https://dwello-backend.vercel.app/dwellings/${propertyId}`
         );
         setDwelling(response.data.data);
         console.log(response.data.data)
