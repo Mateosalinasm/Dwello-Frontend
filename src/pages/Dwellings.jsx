@@ -9,7 +9,9 @@ const Dwellings = () => {
   useEffect(() => {
     const fetchDwellings = async () => {
       try {
-        const response = await axios.get("https://dwello-backend.vercel.app/dwellings/");
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}dwellings`
+        );
         console.log(response)
         setDwellings(response.data.data);
       } catch (error) {
