@@ -1,13 +1,11 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/24/outline";
 
-export default function Modal() {
-  const [open, setOpen] = useState(true);
-
+export default function Modal({ showModal, onClose }) {
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+    <Transition.Root show={showModal} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -33,23 +31,22 @@ export default function Modal() {
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
                 <div>
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-amber-100">
                     <CheckIcon
-                      className="h-6 w-6 text-green-600"
+                      className="h-6 w-6 text-amber-600"
                       aria-hidden="true"
                     />
                   </div>
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title
                       as="h3"
-                      className="text-base font-semibold leading-6 text-gray-900"
+                      className="text-xl font-semibold leading-6 text-amber-500"
                     >
-                      Booking successful
+                      New Dwelling Added
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Consequatur amet labore.
+                        The new Dwelling has been added and its ready to receive bookings
                       </p>
                     </div>
                   </div>
@@ -57,10 +54,10 @@ export default function Modal() {
                 <div className="mt-5 sm:mt-6">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    onClick={() => setOpen(false)}
+                    className="inline-flex w-full justify-center rounded-md bg-amber-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
+                    onClick={onClose}
                   >
-                    Go back to dashboard
+                    Back to Dwellings
                   </button>
                 </div>
               </Dialog.Panel>

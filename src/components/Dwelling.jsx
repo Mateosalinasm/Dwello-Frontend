@@ -1,56 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
+import { Disclosure, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
-import { HeartIcon, MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import Calendar from "./Calendar"
 
-const product = {
-  name: "Zip Tote Basket",
-  price: "$140",
-  rating: 4,
-  images: [
-    {
-      id: 1,
-      name: "Angled view",
-      src: "https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg",
-      alt: "Angled front view with bag zipped and handles upright.",
-    },
-    // More images...
-  ],
-  colors: [
-    {
-      name: "Washed Black",
-      bgColor: "bg-gray-700",
-      selectedColor: "ring-gray-700",
-    },
-    { name: "White", bgColor: "bg-white", selectedColor: "ring-gray-400" },
-    {
-      name: "Washed Gray",
-      bgColor: "bg-gray-500",
-      selectedColor: "ring-gray-500",
-    },
-  ],
-  description: `
-    <p>Oquean is one of Malibu's renowned residences, impossible to overlook while traveling along the Pacific Coast Highway, and it was masterfully crafted by the esteemed architect Harry Gesner. Nestled atop the cliffs overlooking the vast Pacific Ocean, Oquean boasts the most breathtaking, uninterrupted panoramic vistas in all of Malibu. This extraordinary abode is an ideal venue for hosting gatherings, offering striking outdoor and indoor areas that showcase the awe-inspiring views from every angle. Indulge in the epitome of luxury and tranquility within this exceptional, contemporary marvel.</p>
-  `,
-  details: [
-    {
-      name: "Features",
-      items: [
-        "Multiple strap configurations",
-        "Spacious interior with top zip",
-        "Leather handle and tabs",
-        "Interior dividers",
-        "Stainless strap loops",
-        "Double stitched construction",
-        "Water-resistant",
-      ],
-    },
-    // More sections...
-  ],
+const dwellingRating = {
+rating: 4
 };
 
 function classNames(...classes) {
@@ -65,10 +23,9 @@ export default function Dwelling() {
     const fetchDwelling = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/dwellings/${propertyId}`
+          `https://dwello-backend.vercel.app/dwellings/${propertyId}`
         );
         setDwelling(response.data.data);
-        console.log(response.data.data)
       } catch (error) {
         console.error("Error fetching property data:", error);
       }
@@ -145,7 +102,7 @@ export default function Dwelling() {
               </p>
             </div>
 
-            {/* Reviews */}
+            {/* Reviews  */}
             <div className="mt-3">
               <h3 className="sr-only">Reviews</h3>
               <div className="flex items-center">
@@ -154,7 +111,7 @@ export default function Dwelling() {
                     <StarIcon
                       key={rating}
                       className={classNames(
-                        product.rating > rating
+                        dwellingRating.rating > rating
                           ? "text-amber-500"
                           : "text-gray-300",
                         "h-5 w-5 flex-shrink-0"
@@ -163,7 +120,9 @@ export default function Dwelling() {
                     />
                   ))}
                 </div>
-                <p className="sr-only">{product.rating} out of 5 stars</p>
+                <p className="sr-only">
+                  {dwellingRating.rating} out of 5 stars
+                </p>
               </div>
             </div>
 
@@ -172,7 +131,7 @@ export default function Dwelling() {
 
               <div
                 className="space-y-6 text-base text-gray-700"
-                dangerouslySetInnerHTML={{ __html: product.description }}
+                dangerouslySetInnerHTML={{ __html: dwelling.description }}
               />
             </div>
 
