@@ -10,7 +10,7 @@ const Dwellings = () => {
     const fetchDwellings = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}dwellings`
+          `${import.meta.env.VITE_BACKEND_URL}/dwellings`
         );
         console.log(response)
         setDwellings(response.data.data);
