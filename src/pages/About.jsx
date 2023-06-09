@@ -115,7 +115,6 @@ const About = () => {
   }, [controls, inView]);
   return (
     <div className="bg-beige">
-      <Navbar />
       <main className="isolate">
         {/* Hero section */}
         <div className="relative isolate -z-10">

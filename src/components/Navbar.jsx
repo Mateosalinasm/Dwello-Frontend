@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 function classNames(...classes) {
@@ -29,7 +29,7 @@ export default function Navbar() {
   ];
 
   return (
-    <Disclosure as="nav" className="bg-beige fixed z-10 w-full shadow">
+    <Disclosure as="nav" className="fixed z-10 w-full bg-beige shadow">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -76,41 +76,71 @@ export default function Navbar() {
                         );
                       })}
                     </> */}
-                    <Link
+                    <NavLink
                       to="/dashboard"
                       onClick={() => window.scrollTo(0, 0)}
-                      className="inline-flex items-center border-b-2 border-amber-700 px-1 pt-1 text-sm font-medium text-amber-950"
+                      className={({ isActive }) =>
+                        `inline-flex items-center border-b-2 ${
+                          isActive
+                            ? "!border-amber-700 !text-amber-950"
+                            : "border-transparent text-gray-500"
+                        } px-1 pt-1 text-sm font-medium hover:border-gray-300 hover:text-amber-950 hover:duration-200 hover:ease-in-out`
+                      }
                     >
                       Dashboard
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                       to="/dwellings"
                       onClick={() => window.scrollTo(0, 0)}
-                      className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-amber-950 hover:duration-200 hover:ease-in-out"
+                      className={({ isActive }) =>
+                        `inline-flex items-center border-b-2 ${
+                          isActive
+                            ? "!border-amber-700 !text-amber-950"
+                            : "border-transparent text-gray-500"
+                        } px-1 pt-1 text-sm font-medium hover:border-gray-300 hover:text-amber-950 hover:duration-200 hover:ease-in-out`
+                      }
                     >
                       Dwellings
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                       to="/top-rated"
                       onClick={() => window.scrollTo(0, 0)}
-                      className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      className={({ isActive }) =>
+                        `inline-flex items-center border-b-2 ${
+                          isActive
+                            ? "!border-amber-700 !text-amber-950"
+                            : "border-transparent text-gray-500"
+                        } px-1 pt-1 text-sm font-medium hover:border-gray-300 hover:text-amber-950 hover:duration-200 hover:ease-in-out`
+                      }
                     >
                       Top Rated
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                       to="/about"
                       onClick={() => window.scrollTo(0, 0)}
-                      className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      className={({ isActive }) =>
+                        `inline-flex items-center border-b-2 ${
+                          isActive
+                            ? "!border-amber-700 !text-amber-950"
+                            : "border-transparent text-gray-500"
+                        } px-1 pt-1 text-sm font-medium hover:border-gray-300 hover:text-amber-950 hover:duration-200 hover:ease-in-out`
+                      }
                     >
                       About
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                       to="/contact-us"
                       onClick={() => window.scrollTo(0, 0)}
-                      className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      className={({ isActive }) =>
+                        `inline-flex items-center border-b-2 ${
+                          isActive
+                            ? "!border-amber-700 !text-amber-950"
+                            : "border-transparent text-gray-500"
+                        } px-1 pt-1 text-sm font-medium hover:border-gray-300 hover:text-amber-950 hover:duration-200 hover:ease-in-out`
+                      }
                     >
                       Contact Us
-                    </Link>
+                    </NavLink>
                   </div>
                 }
               </div>

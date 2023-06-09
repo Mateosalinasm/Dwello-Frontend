@@ -4,7 +4,6 @@ import Navbar from "../components/Navbar";
 export default function Example() {
   return (
     <>
-      <Navbar />
       <form>
         <div className="space-y-12 p-10">
           <div className="border-b border-gray-900/10 pb-12">

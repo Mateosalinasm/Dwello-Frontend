@@ -57,7 +57,7 @@ export default function Mobile() {
               initial="hidden"
               animate={controls}
               variants={h1Variants}
-              className="mb-12 mt-10 max-w-lg text-4xl font-bold leading-18 tracking-tight text-amber-800 max-sm:leading-12 sm:text-6xl"
+              className="mb-12 mt-10 max-w-lg text-4xl font-bold leading-18 tracking-tight text-amber-600 max-sm:leading-12 sm:text-6xl"
             >
               Mobile App Coming Soon!
             </motion.h1>

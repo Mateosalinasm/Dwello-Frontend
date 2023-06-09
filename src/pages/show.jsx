@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 const Show = () => {
   return (
     <div>
-      <Navbar />
       <Dwelling />
       <Footer />
     </div>

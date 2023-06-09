@@ -2,6 +2,7 @@
 import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { motion } from 'framer-motion'
 
 const autoplayOptions = {
   delay: 4000,
@@ -82,7 +83,14 @@ export const TestimonialCarousel = () => {
   ];
 
   return (
-    <div className="embla" ref={emblaRef}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 1.5, duration: 1.5 }}
+      viewport={{ once: true }}
+      className="embla"
+      ref={emblaRef}
+    >
       <div className="embla__container">
         <div className="embla__slide">
           <div className="bg-beige pb-16 pt-24 sm:pb-24 sm:pt-32 xl:pb-32">
@@ -197,7 +205,7 @@ export const TestimonialCarousel = () => {
             <div className="bg-amber-800 pb-20 sm:pb-24 xl:pb-0">
               <div className="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
                 <div className="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
-                  <div className="xl:aspect-auto max-md:w-80 relative aspect-[2/3] md:w-96 h-full max-md:mx-auto max-md:aspect-[2/3] max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto lg:w-96 xl:mx-0–">
+                  <div className="xl:aspect-auto xl:mx-0– relative aspect-[2/3] h-full max-md:mx-auto max-md:aspect-[2/3] max-md:w-80 max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto md:w-96 lg:w-96">
                     <img
                       className="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover shadow-2xl"
                       src="/images/Testimonial Photos/3.png"
@@ -251,7 +259,7 @@ export const TestimonialCarousel = () => {
             <div className="bg-amber-800 pb-20 sm:pb-24 xl:pb-0">
               <div className="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
                 <div className="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
-                  <div className="xl:aspect-auto max-md:w-80 relative aspect-[2/3] md:w-96 h-full max-md:mx-auto max-md:aspect-[2/3] max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto lg:w-96 xl:mx-0–">
+                  <div className="xl:aspect-auto xl:mx-0– relative aspect-[2/3] h-full max-md:mx-auto max-md:aspect-[2/3] max-md:w-80 max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto md:w-96 lg:w-96">
                     <img
                       className="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover shadow-2xl"
                       src="/images/Testimonial Photos/4.png"
@@ -303,7 +311,7 @@ export const TestimonialCarousel = () => {
             <div className="bg-amber-800 pb-20 sm:pb-24 xl:pb-0">
               <div className="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
                 <div className="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
-                  <div className="xl:aspect-auto max-md:w-80 relative aspect-[2/3] md:w-96 h-full max-md:mx-auto max-md:aspect-[2/3] max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto lg:w-96 xl:mx-0–">
+                  <div className="xl:aspect-auto xl:mx-0– relative aspect-[2/3] h-full max-md:mx-auto max-md:aspect-[2/3] max-md:w-80 max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto md:w-96 lg:w-96">
                     <img
                       className="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover shadow-2xl"
                       src="/images/Testimonial Photos/5.png"
@@ -357,7 +365,7 @@ export const TestimonialCarousel = () => {
             <div className="bg-amber-800 pb-20 sm:pb-24 xl:pb-0">
               <div className="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
                 <div className="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
-                  <div className="xl:aspect-auto max-md:w-80 relative aspect-[2/3] md:w-96 h-full max-md:mx-auto max-md:aspect-[2/3] max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto lg:w-96 xl:mx-0–">
+                  <div className="xl:aspect-auto xl:mx-0– relative aspect-[2/3] h-full max-md:mx-auto max-md:aspect-[2/3] max-md:w-80 max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto md:w-96 lg:w-96">
                     <img
                       className="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover shadow-2xl"
                       src="/images/Testimonial Photos/7.png"
@@ -411,7 +419,7 @@ export const TestimonialCarousel = () => {
             <div className="bg-amber-800 pb-20 sm:pb-24 xl:pb-0">
               <div className="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
                 <div className="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
-                  <div className="xl:aspect-auto max-md:w-80 relative aspect-[2/3] md:w-96 h-full max-md:mx-auto max-md:aspect-[2/3] max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto lg:w-96 xl:mx-0–">
+                  <div className="xl:aspect-auto xl:mx-0– relative aspect-[2/3] h-full max-md:mx-auto max-md:aspect-[2/3] max-md:w-80 max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto md:w-96 lg:w-96">
                     <img
                       className="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover shadow-2xl"
                       src="/images/Testimonial Photos/8.png"
@@ -463,7 +471,7 @@ export const TestimonialCarousel = () => {
             <div className="bg-amber-800 pb-20 sm:pb-24 xl:pb-0">
               <div className="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
                 <div className="-mt-8 w-full max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
-                  <div className="xl:aspect-auto max-md:w-80 relative aspect-[2/3] md:w-96 h-full max-md:mx-auto max-md:aspect-[2/3] max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto lg:w-96 xl:mx-0–">
+                  <div className="xl:aspect-auto xl:mx-0– relative aspect-[2/3] h-full max-md:mx-auto max-md:aspect-[2/3] max-md:w-80 max-sm:mx-auto max-sm:aspect-[2/3] max-sm:w-80 md:mx-auto md:w-96 lg:w-96">
                     <img
                       className="absolute inset-0 h-full w-full rounded-2xl bg-gray-800 object-cover shadow-2xl"
                       src="/images/Testimonial Photos/9.png"
@@ -513,6 +521,6 @@ export const TestimonialCarousel = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

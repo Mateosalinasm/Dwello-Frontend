@@ -9,7 +9,6 @@ import Navbar from "./Navbar";
 export default function Contact() {
   return (
     <>
-    <Navbar />
       <div className="bg-beige relative isolate ">
         <div className="mx-auto grid  max-w-7xl grid-cols-1 lg:grid-cols-2">
           <div className="relative -z-10 h-screen px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">

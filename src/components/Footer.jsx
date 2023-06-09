@@ -1,28 +1,4 @@
 const navigation = {
-  solutions: [
-    { name: "Marketing", href: "#" },
-    { name: "Analytics", href: "#" },
-    { name: "Commerce", href: "#" },
-    { name: "Insights", href: "#" },
-  ],
-  support: [
-    { name: "Pricing", href: "#" },
-    { name: "Documentation", href: "#" },
-    { name: "Guides", href: "#" },
-    { name: "API Status", href: "#" },
-  ],
-  company: [
-    { name: "About", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Jobs", href: "#" },
-    { name: "Press", href: "#" },
-    { name: "Partners", href: "#" },
-  ],
-  legal: [
-    { name: "Claim", href: "#" },
-    { name: "Privacy", href: "#" },
-    { name: "Terms", href: "#" },
-  ],
   social: [
     {
       name: "Facebook",
@@ -91,23 +67,8 @@ const navigation = {
 export default function Footer() {
   return (
     <footer className="bg-beige w-screen" aria-labelledby="footer-heading">
-      <h2 id="footer-heading" className="sr-only">
-        Footer
-      </h2>
-      <div className="mx-auto px-6 pb-8 w-full  sm:pt-24 lg:px-8 lg:pt-32">
-        <div className="flex flex-row justify-between">
-          <div className="space-y-8">
-            <p className="text-lg leading-6 text-gray-600">
-              "Don't dwell on the possibilities, elevate your stay today"
-            </p>
-            <img
-              className="h-14"
-              src="/images/Logos/Dwello-Brown.png"
-              alt="Company name"
-            />
-          </div>
-        </div>
-        <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24 flex justify-between max-sm:gap-4 max-sm:leading-10">
+      <div className="mx-auto px-6 pb-8 w-full lg:px-8 ">
+        <div className="mt-16 border-t border-gray-900/10 pt-8 flex justify-between max-sm:gap-4 max-sm:leading-10">
           <p className="text-xs leading-5 text-gray-500">
             &copy; 2023 Dwello, Inc. All rights reserved.
           </p>

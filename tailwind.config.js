@@ -61,6 +61,9 @@ export default {
         '150': '50rem',
         '256': '64rem',
 
+      },
+      colors: {
+        'beige': '#F4F1ED',
       }
     },
     fontSize: {

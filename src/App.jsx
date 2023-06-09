@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import "./App.css";
@@ -10,10 +9,14 @@ import Contact from "./components/ContactForm";
 import EditDwelling from './pages/EditDwelling'
 import NewDwelling from "./pages/NewDwelling";
 import Show from "./pages/show";
+import Navbar from "./components/Navbar";
 
 function App() {
+  const location = useLocation();
+
   return (
     <div className="App">
+      {location.pathname !== "/" && <Navbar />}
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/about" element={<About />} />
