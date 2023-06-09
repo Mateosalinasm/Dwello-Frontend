@@ -1,49 +1,48 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import React, { useState, useEffect } from "react";
-import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
+import axios from "axios";
 
-export default function FormModal({ showModal, onClose }) {
-  const [imageFile, setImageFile] = useState(null);
+
+
+export default function FormModal({ showModal, onClose, onAddNewDwelling }) {
   const [features, setFeatures] = useState([]);
   const [propertyImages, setPropertyImages] = useState([]);
 
-  const addFeature = (feature) => {
-    setFeatures([...features, feature]);
-  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  const addPropertyImage = (image) => {
-    setPropertyImages([...propertyImages, image]);
-  };
+    // Create a new property object with form data
+    const newProperty = {
+      name: event.target.name.value,
+      price: event.target.price.value,
+      description: event.target.description.value,
+      options: event.target.options.value,
+      features: event.target.feature.value
+        .split(",")
+        .map((feature) => feature.trim()),
+      imageSrc: event.target.imageSrc.value,
+      propertyImages: event.target.propertyImages.value.split(",")
+        .map((image) => image.trim()),
+    };
+    // Call the API to save the new property
+    try {
+      const response = await axios.post(
+        "https://dwello-backend.vercel.app/dwellings",
+        newProperty, // Pass newProperty as the second argument
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-  const handlePropertyImagesDrop = (e, callback) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      const file = files[0];
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = (e) => {
-        callback(e.target.result);
-      };
-    }
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      const file = files[0];
-      setImageFile(file);
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = (e) => {
-        document.getElementById("imageSrc").value = e.target.result;
-      };
+      // Clear form data and close the modal
+      event.target.reset();
+      onAddNewDwelling(response.data.data);
+      onClose();
+    } catch (error) {
+      console.error("Error creating property:", error);
     }
   };
 
@@ -79,14 +78,9 @@ export default function FormModal({ showModal, onClose }) {
                     <h1>New Dwelling</h1>
                   </div>
                   <form
-                    action="#"
                     method="POST"
                     className="space-y-6"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      addFeature(document.getElementById("feature").value);
-                      // Add the rest of the form submission logic here
-                    }}
+                    onSubmit={handleSubmit}
                   >
                     <div>
                       <label
@@ -156,42 +150,42 @@ export default function FormModal({ showModal, onClose }) {
                         />
                       </div>
                     </div>
-                    <div className="col-span-full">
+                    <div>
                       <label
-                        htmlFor="cover-photo"
+                        htmlFor="imageSrc"
                         className="block text-sm font-medium leading-6 text-gray-900"
                       >
-                        Main photo
+                        Main Image
                       </label>
-                      <div
-                        className=" flex justify-center rounded-lg border border-dashed border-gray-900/25 py-4"
-                        onDragOver={handleDragOver}
-                        onDrop={handleDrop}
+                      <div className="mt-2">
+                        <input
+                          id="imageSrc"
+                          name="imageSrc"
+                          type="text"
+                          required
+                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="propertyImages"
+                        className="block text-sm font-medium leading-6 text-gray-900"
                       >
-                        <div className="text-center">
-                          <PhotoIcon
-                            className="mx-auto h-12 w-12 text-gray-300"
-                            aria-hidden="true"
-                          />
-                          <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                            <label
-                              htmlFor="imageSrc"
-                              className="relative cursor-pointer rounded-md bg-white font-semibold text-amber-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-amber-600 focus-within:ring-offset-2 hover:text-amber-500"
-                            >
-                              <span>Upload a file</span>
-                              <input
-                                id="imageSrc"
-                                name="imageSrc"
-                                type="file"
-                                className="sr-only"
-                              />
-                            </label>
-                            <p className="pl-1">or drag and drop</p>
-                          </div>
-                          <p className="text-xs leading-5 text-gray-600">
-                            PNG, JPG, GIF up to 10MB
-                          </p>
-                        </div>
+                        Images
+                      </label>
+                      <div className="mt-2">
+                        <input
+                          id="propertyImages"
+                          name="propertyImages"
+                          type="text"
+                          className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-600 sm:text-sm sm:leading-6"
+                        />
+                      </div>
+                      <div>
+                        {propertyImages.map((image, index) => (
+                          <p key={index}>{image}</p>
+                        ))}
                       </div>
                     </div>
                     <div>
@@ -216,45 +210,6 @@ export default function FormModal({ showModal, onClose }) {
                       </div>
                     </div>
 
-                    <div className="col-span-full">
-                      <label
-                        htmlFor="propertyImage"
-                        className="block text-sm font-medium leading-6 text-gray-900"
-                      >
-                        Property Images
-                      </label>
-                      <div
-                        className="flex justify-center rounded-lg border border-dashed border-gray-900/25 py-4"
-                        onDragOver={handleDragOver}
-                        onDrop={(e) => {
-                          handleDrop(e, addPropertyImage);
-                        }}
-                      >
-                        {/* ... */}
-                        <label
-                          htmlFor="propertyImage"
-                          className="relative cursor-pointer rounded-md bg-white font-semibold text-amber-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-amber-600 focus-within:ring-offset-2 hover:text-amber-500"
-                        >
-                          <span>Upload a file</span>
-                          <input
-                            id="propertyImage"
-                            name="propertyImage"
-                            type="file"
-                            className="sr-only"
-                          />
-                        </label>
-                        {/* ... */}
-                      </div>
-                      <div>
-                        {propertyImages.map((image, index) => (
-                          <img
-                            key={index}
-                            src={image}
-                            alt={`Property Image ${index}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
                     <div>
                       <button
                         type="submit"
@@ -264,31 +219,7 @@ export default function FormModal({ showModal, onClose }) {
                       </button>
                     </div>
                   </form>
-
-                  {/* <div className="mt-3 text-center sm:mt-5">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-xl font-semibold leading-6 text-amber-500"
-                    >
-                      New Dwelling Addeddfhdfbnsdb
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        The new Dwelling has been added and its ready to receive
-                        bookings
-                      </p>
-                    </div>
-                  </div> */}
                 </div>
-                {/* <div className="mt-5 sm:mt-6">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-amber-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600"
-                    onClick={onClose}
-                  >
-                    Back to Dwellings
-                  </button>
-                </div> */}
               </Dialog.Panel>
             </Transition.Child>
           </div>

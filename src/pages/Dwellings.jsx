@@ -4,8 +4,8 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import Skeleton from "@mui/material/Skeleton";
 import Footer from "../components/Footer";
-import Modal from "../components/Modal"
-import FormModal from "../components/NewModal"
+import Modal from "../components/Modal";
+import FormModal from "../components/NewModal";
 
 const Dwellings = () => {
   const [dwellings, setDwellings] = useState([]);
@@ -31,6 +31,10 @@ const Dwellings = () => {
 
   const toggleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const addNewDwelling = (newDwelling) => {
+    setDwellings((prevDwellings) => [...prevDwellings, newDwelling]);
   };
 
   return (
@@ -98,9 +102,13 @@ const Dwellings = () => {
                 </div>
               ))}
         </div>
-        <FormModal showModal={showModal} onClose={toggleModal} />
-        <Footer />
+        <FormModal
+          showModal={showModal}
+          onClose={toggleModal}
+          onAddNewDwelling={addNewDwelling}
+        />
       </div>
+      <Footer />
     </div>
   );
 };

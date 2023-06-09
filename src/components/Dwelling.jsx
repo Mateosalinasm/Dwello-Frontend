@@ -195,10 +195,10 @@ export default function Dwelling() {
                           ))}
                         </motion.ul>
                       </Disclosure.Panel>
-                      <Calendar />
                     </>
                   )}
                 </Disclosure>
+                <Calendar />
               </div>
             </section>
           </div>
