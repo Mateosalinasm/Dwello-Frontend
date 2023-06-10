@@ -1,13 +1,11 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-
 import "./App.css";
+import NotFound from "./components/NotFound";
 import Welcome from "./pages/Welcome.jsx";
 import About from "./pages/About.jsx"
 import Dwellings from "./pages/Dwellings.jsx"
 import Dashboard from "./pages/Dashboard.jsx";
 import Contact from "./components/ContactForm";
-import EditDwelling from './pages/EditDwelling'
-import NewDwelling from "./pages/NewDwelling";
 import Show from "./pages/show";
 import Navbar from "./components/Navbar";
 
@@ -24,8 +22,7 @@ function App() {
         <Route path="/dwellings" element={<Dwellings />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dwellings/:propertyId" element={<Show />} />
-        <Route path="/dwellings/:propertyId/edit" element={<EditDwelling />} />
-        <Route path="/dwellings/new" element={<NewDwelling />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

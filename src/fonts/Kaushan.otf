@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'KaushanScript-Regular';
+    src: local('KaushanScript-Regular),
+        url('./fonts/KaushanScript-Regular.otf) format('ttf');
+}

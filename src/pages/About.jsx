@@ -1,8 +1,6 @@
 import { useState, useEffect, React } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
-// const Footer = dynamic(() =>  import  ("../components/Footer"));
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
@@ -11,9 +9,9 @@ const phoneVariants = {
   hidden: { x: "100%", opacity: 0 },
 };
 
-const badgeVariants = {
-  visible: { x: 0, opacity: 1, transition: { duration: 1.4, delay: 0.3 } },
-  hidden: { x: "-100%", opacity: 0 },
+const imgVariants = {
+  visible: { y: 0, opacity: 1, transition: { duration: 1.4, delay: 0.3 } },
+  hidden: { y: "-10%", opacity: 0 },
 };
 
 const textVariants = {
@@ -134,14 +132,32 @@ const About = () => {
             <div className="mx-auto max-w-7xl px-6 pb-32 pt-36 sm:pt-60 lg:px-8 lg:pt-32">
               <div className="mx-auto max-w-2xl gap-x-16 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
                 <div className="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
-                  <h1 className="relative -top-10 left-0 text-4xl font-bold tracking-tight text-amber-500 max-sm:-top-20 max-sm:text-6xl sm:text-8xl">
+                  <motion.h1
+                    initial={{ y: "-10%", opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.7 }}
+                    viewport={{ once: true }}
+                    className="relative -top-10 left-0 text-4xl font-bold tracking-tight text-amber-500 max-sm:-top-20 max-sm:text-6xl sm:text-8xl"
+                  >
                     About Us
-                  </h1>
+                  </motion.h1>
                   <div className="-top-18 container relative">
-                    <h1 className=" text-6xl font-bold leading-18 tracking-tight text-amber-600 max-sm:text-4xl">
+                    <motion.h1
+                      initial={{ y: "-10%", opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.5, duration: 0.7 }}
+                      viewport={{ once: true }}
+                      className=" text-6xl font-bold leading-18 tracking-tight text-amber-600 max-sm:text-4xl"
+                    >
                       We’re changing the way people travel.
-                    </h1>
-                    <p className="text-lg relative  mt-6 leading-8 text-gray-700 sm:max-w-md lg:max-w-none">
+                    </motion.h1>
+                    <motion.p
+                      initial={{ y: "-10%", opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 0.5, duration: 0.7 }}
+                      viewport={{ once: true }}
+                      className="text-lg relative  mt-6 leading-8 text-gray-700 sm:max-w-md lg:max-w-none"
+                    >
                       At Dwello, we're revolutionizing the way people travel. By
                       providing a platform that connects travelers with unique
                       and exotic accommodations, we're transforming the
@@ -152,45 +168,69 @@ const About = () => {
                       destination. We believe that travel should be an
                       adventure, and our mission is to empower individuals to
                       explore the world in a truly exceptional way.
-                    </p>
+                    </motion.p>
                   </div>
                 </div>
                 <div className="sm:-mt-33 mt-14 flex justify-end gap-8 sm:justify-center sm:pl-40 lg:mt-0 lg:pl-0">
-                  <div className="mr-auto w-44 flex-none space-y-8 max-sm:gap-4 sm:mr-0 sm:pt-52 lg:pt-36">
-                    <div className="relative">
+                  <div className="mr-auto w-44 flex-none space-y-8 max-sm:gap-4 sm:mr-0 sm:pt-52 lg:pt-20">
+                    <motion.div
+                      initial={{ y: "-10%", opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 1, duration: 1 }}
+                      viewport={{ once: true }}
+                      className="relative"
+                    >
                       <img
-                        src="https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
+                        src="https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=780&q=80"
                         alt=""
                         className="aspect-[2/4] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
-                    </div>
-                    <div className="relative">
+                    </motion.div>
+                    <motion.div
+                      initial={{ y: "-10%", opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 1.3, duration: 1 }}
+                      viewport={{ once: true }}
+                      className="relative"
+                    >
                       <img
-                        src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-x=.4&w=396&h=528&q=80"
+                        src="https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
                         alt=""
                         className="aspect-[2/4] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
-                    </div>
+                    </motion.div>
                   </div>
                   <div className="w-44 flex-none space-y-8 pt-32 sm:pt-0">
-                    <div className="relative">
+                    <motion.div
+                      initial={{ y: "-10%", opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 1.6, duration: 1 }}
+                      viewport={{ once: true }}
+                      className="relative"
+                    >
                       <img
-                        src="https://images.unsplash.com/photo-1670272504528-790c24957dda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=left&w=400&h=528&q=80"
+                        src="https://images.unsplash.com/photo-1528543606781-2f6e6857f318?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80"
                         alt=""
                         className="aspect-[2/4] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
-                    </div>
-                    <div className="relative">
+                    </motion.div>
+                    <motion.div
+                      initial={{ y: "-10%", opacity: 0 }}
+                      whileInView={{ y: 0, opacity: 1 }}
+                      transition={{ delay: 1.9, duration: 1 }}
+                      viewport={{ once: true }}
+                      className="relative"
+                    >
                       <img
-                        src="https://images.unsplash.com/photo-1670272505284-8faba1c31f7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
+                        src="https://images.unsplash.com/photo-1545389336-cf090694435e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
                         alt=""
                         className="aspect-[2/4] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
               </div>
@@ -201,27 +241,50 @@ const About = () => {
         {/* Content section */}
         <div className="mx-auto -mt-12 max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            <h2 className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5, duration: 1 }}
+              viewport={{ once: true }}
+              className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl"
+            >
               Our Mission
-            </h2>
+            </motion.h2>
             <div className="mt-6 flex flex-col gap-x-8 gap-y-20 lg:flex-row">
               <div className="lg:w-full lg:max-w-2xl lg:flex-auto">
-                <p className="text-xl leading-8 text-gray-700">
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 1, duration: 1 }}
+                  viewport={{ once: true }}
+                  className="text-xl leading-8 text-gray-700"
+                >
                   At Dwello, our mission is to redefine travel by connecting
                   people with extraordinary experiences. We curate a collection
                   of unique accommodations that capture the essence of each
                   destination, allowing travelers to immerse themselves in
                   authentic and unforgettable stays.
-                </p>
+                </motion.p>
                 <div className="mt-10 max-w-xl text-xl leading-7 text-gray-700">
-                  <p>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 1.5, duration: 1 }}
+                    viewport={{ once: true }}
+                  >
                     We believe that remarkable travel experiences should be
                     accessible to all. Whether you're an adventurous explorer or
                     a family seeking new horizons, Dwello offers a diverse range
                     of handpicked accommodations that cater to every traveler's
                     preferences and desires.
-                  </p>
-                  <p className="mt-10">
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 2, duration: 1 }}
+                    viewport={{ once: true }}
+                    className="mt-10"
+                  >
                     Dwello is not just a travel platform; it's a movement. We
                     aim to foster responsible and sustainable tourism practices,
                     supporting local communities and preserving the natural and
@@ -230,23 +293,27 @@ const About = () => {
                     strive to promote cross-cultural understanding and economic
                     growth. Join us on a transformative journey of exploration,
                     connection, and discovery with Dwello.
-                  </p>
+                  </motion.p>
                 </div>
               </div>
               <div className="lg:flex lg:flex-auto lg:justify-center">
                 <dl className="w-66 space-y-8 leading-16 xl:w-80">
-                  {stats.map((stat) => (
-                    <div
+                  {stats.map((stat, index) => (
+                    <motion.div
+                      initial={{ x: "100%", opacity: 0 }}
+                      whileInView={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 2.4 + index, duration: 0.4 }}
+                      viewport={{ once: true }}
                       key={stat.label}
                       className="flex flex-col-reverse gap-y-2"
                     >
-                      <dt className="text-base leading-7 text-amber-700">
+                      <dt className="text-base leading-7 text-amber-900">
                         {stat.label}
                       </dt>
                       <dd className="text-5xl font-semibold tracking-tight text-amber-600">
                         {stat.value}
                       </dd>
-                    </div>
+                    </motion.div>
                   ))}
                 </dl>
               </div>

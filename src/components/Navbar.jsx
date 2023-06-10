@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, NavLink } from "react-router-dom";
+import "../fonts/fonts.css";
 
 
 function classNames(...classes) {
@@ -9,25 +10,6 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const navLinks = [
-    {
-      name: "Dashboard",
-      link: "dashboard",
-    },
-    {
-      name: "Dwellings",
-      link: "dwellings",
-    },
-    {
-      name: "Top Rated",
-      link: "top-rated",
-    },
-    {
-      name: "Contact Us",
-      link: "contact-us",
-    },
-  ];
-
   return (
     <Disclosure as="nav" className="fixed z-10 w-full bg-beige shadow">
       {({ open }) => (
@@ -60,22 +42,6 @@ export default function Navbar() {
                 </div>
                 {
                   <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                    {/* <>
-                      {navLinks.map((link) => {
-                        const isActive = pathname.startsWith(link.href);
-
-                        return (
-                          <Link
-                            className={isActive ? "text-blue" : "text-black"}
-                            href={link.href}
-                            key={link.name}
-                          >
-                            {link.name}
-                          </Link>
-                        );
-                      })}
-                    </> */}
                     <NavLink
                       to="/dashboard"
                       onClick={() => window.scrollTo(0, 0)}
@@ -103,17 +69,17 @@ export default function Navbar() {
                       Dwellings
                     </NavLink>
                     <NavLink
-                      to="/top-rated"
+                      to="/luxe"
                       onClick={() => window.scrollTo(0, 0)}
                       className={({ isActive }) =>
                         `inline-flex items-center border-b-2 ${
                           isActive
                             ? "!border-amber-700 !text-amber-950"
                             : "border-transparent text-gray-500"
-                        } px-1 pt-1 text-sm font-medium hover:border-gray-300 hover:text-amber-950 hover:duration-200 hover:ease-in-out`
+                        } kaushan px-1 pt-1 text-base font-medium hover:border-gray-300 hover:text-amber-950 hover:duration-200 hover:ease-in-out`
                       }
                     >
-                      Top Rated
+                      Luxe
                     </NavLink>
                     <NavLink
                       to="/about"
