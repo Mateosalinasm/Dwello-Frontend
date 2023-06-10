@@ -6,7 +6,7 @@ import { StarIcon, EllipsisHorizontalIcon } from "@heroicons/react/20/solid";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import Calendar from "./Calendar";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DotMenu from "./Menu";
 import EditFormModal from "./EditModal";
 
@@ -22,6 +22,7 @@ export default function Dwelling() {
   const { propertyId } = useParams();
   const [dwelling, setDwelling] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDwelling = async () => {
@@ -38,9 +39,35 @@ export default function Dwelling() {
     fetchDwelling();
   }, [propertyId]);
 
-  if (!dwelling) {
-    return <div>Loading...</div>;
-  }
+ async function handleDeleteButtonClick() {
+   try {
+     const response = await axios.delete(
+       `https://dwello-backend.vercel.app/dwellings/${propertyId}`
+     );
+     const data = response.data;
+     if (response.status === 200) {
+       console.log(data.message);
+       setDwelling(null);
+       navigate("/dwellings");
+     } else {
+       console.error(data.message);
+     }
+   } catch (error) {
+     console.error("Error while deleting the property:", error);
+   }
+ }
+
+ if (!dwelling) {
+   return <div>Loading...</div>;
+ }
+
+  console.log("Dwelling:", dwelling);
+  console.log("Property ID:", propertyId);
+  console.log(
+    "Endpoint URL:",
+    `https://dwello-backend.vercel.app/dwellings/${propertyId}`
+  );
+
 
   function handleEditDwelling(updatedDwelling) {
     setDwelling(updatedDwelling);
@@ -53,6 +80,7 @@ export default function Dwelling() {
   function handleCloseEditModal() {
     setIsEditModalOpen(false);
   }
+
   return (
     <div className="bg-beige">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -109,7 +137,10 @@ export default function Dwelling() {
               <h1 className="text-3xl font-bold tracking-tight text-amber-600">
                 {dwelling.name}
               </h1>
-              <DotMenu onEditButtonClick={handleEditButtonClick} />
+              <DotMenu
+                onEditButtonClick={handleEditButtonClick}
+                onDeleteButtonClick={handleDeleteButtonClick}
+              />
             </div>
 
             <div className="mt-3">

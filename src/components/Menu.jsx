@@ -1,45 +1,44 @@
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisHorizontalIcon } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
-import EditFormModal from "./EditModal";
+// import EditFormModal from "./EditModal";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function ParentComponent() {
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [property, setProperty] = useState({});
+// function ParentComponent() {
+//   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+//   const [property, setProperty] = useState({});
 
-  function handleEditButtonClick() {
-    setIsEditModalOpen(true);
-  }
+//   function handleEditButtonClick() {
+//     setIsEditModalOpen(true);
+//   }
 
-  function handleCloseEditModal() {
-    setIsEditModalOpen(false);
-  }
+//   function handleCloseEditModal() {
+//     setIsEditModalOpen(false);
+//   }
 
-  function handleEditDwelling(updatedProperty) {
-    setProperty(updatedProperty);
-  }
+//   function handleEditDwelling(updatedProperty) {
+//     setProperty(updatedProperty);
+//   }
 
-  return (
-    <div>
-      <DotMenu onEditButtonClick={handleEditButtonClick} />
-      {isEditModalOpen && (
-        <EditFormModal
-          showModal={isEditModalOpen}
-          onClose={handleCloseEditModal}
-          property={property}
-          onEditDwelling={handleEditDwelling} // Pass the function to handle updating the dwelling
-        />
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <DotMenu onEditButtonClick={handleEditButtonClick} />
+//       {isEditModalOpen && (
+//         <EditFormModal
+//           showModal={isEditModalOpen}
+//           onClose={handleCloseEditModal}
+//           property={property}
+//           onEditDwelling={handleEditDwelling} // Pass the function to handle updating the dwelling
+//         />
+//       )}
+//     </div>
+//   );
+// }
 
-export default function DotMenu({ onEditButtonClick }) {
+export default function DotMenu({ onEditButtonClick, onDeleteButtonClick }) {
   return (
     <div className="z-10 flex justify-end  leading-6 text-gray-900">
       <Menu as="div" className="relative ml-auto">
@@ -73,11 +72,11 @@ export default function DotMenu({ onEditButtonClick }) {
             <Menu.Item>
               {({ active }) => (
                 <button
-                  href="#"
                   className={classNames(
                     active ? "bg-gray-50" : "",
                     "block px-3 py-1 text-sm leading-6 text-gray-900"
                   )}
+                  onClick={onDeleteButtonClick}
                 >
                   Delete<span className="sr-only"></span>
                 </button>
