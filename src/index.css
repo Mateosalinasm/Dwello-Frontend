@@ -9,6 +9,10 @@
     /* background-color: #F4F1ED; */
 }
 
+html {
+  background-color: #F4F1ED;
+}
+
 .width {
   position: absolute;
   right: 0;

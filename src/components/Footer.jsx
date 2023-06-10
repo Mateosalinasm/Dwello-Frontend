@@ -68,7 +68,7 @@ export default function Footer() {
   return (
     <footer className="bg-beige w-screen" aria-labelledby="footer-heading">
       <div className="mx-auto px-6 pb-8 w-full lg:px-8 ">
-        <div className="mt-16 border-t border-gray-900/10 pt-8 flex justify-between max-sm:gap-4 max-sm:leading-10">
+        <div className="border-t border-gray-900/10 pt-8 flex justify-between max-sm:gap-4 max-sm:leading-10">
           <p className="text-xs leading-5 text-gray-500">
             &copy; 2023 Dwello, Inc. All rights reserved.
           </p>

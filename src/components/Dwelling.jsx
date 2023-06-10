@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Disclosure, Tab } from "@headlessui/react";
-import { StarIcon } from "@heroicons/react/20/solid";
+import { Disclosure, Tab, Menu, Transition } from "@headlessui/react";
+import { StarIcon, EllipsisHorizontalIcon } from "@heroicons/react/20/solid";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
-import Calendar from "./Calendar"
+import Calendar from "./Calendar";
+import { Link } from "react-router-dom";
+import DotMenu from "./Menu";
+import EditFormModal from "./EditModal";
 
 const dwellingRating = {
-rating: 4
+  rating: 4,
 };
 
 function classNames(...classes) {
@@ -17,7 +20,8 @@ function classNames(...classes) {
 
 export default function Dwelling() {
   const { propertyId } = useParams();
-  const [ dwelling, setDwelling] = useState(null);
+  const [dwelling, setDwelling] = useState(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchDwelling = async () => {
@@ -38,7 +42,17 @@ export default function Dwelling() {
     return <div>Loading...</div>;
   }
 
+  function handleEditDwelling(updatedDwelling) {
+    setDwelling(updatedDwelling);
+  }
 
+  function handleEditButtonClick() {
+    setIsEditModalOpen(true);
+  }
+
+  function handleCloseEditModal() {
+    setIsEditModalOpen(false);
+  }
   return (
     <div className="bg-beige">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -51,7 +65,7 @@ export default function Dwelling() {
                 {dwelling.propertyImages.map((image, index) => (
                   <Tab
                     key={index}
-                    className="bg-beige relative flex h-24 cursor-pointer items-center justify-center rounded-md text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
+                    className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-beige text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                   >
                     {({ selected }) => (
                       <>
@@ -91,9 +105,12 @@ export default function Dwelling() {
 
           {/* Property info */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-            <h1 className="text-3xl font-bold tracking-tight text-amber-600">
-              {dwelling.name}
-            </h1>
+            <div className="flex items-center justify-between">
+              <h1 className="text-3xl font-bold tracking-tight text-amber-600">
+                {dwelling.name}
+              </h1>
+              <DotMenu onEditButtonClick={handleEditButtonClick} />
+            </div>
 
             <div className="mt-3">
               <h2 className="sr-only">Property information</h2>
@@ -202,6 +219,14 @@ export default function Dwelling() {
               </div>
             </section>
           </div>
+          {isEditModalOpen && (
+            <EditFormModal
+              showModal={isEditModalOpen}
+              onClose={handleCloseEditModal}
+              property={dwelling}
+              onEditDwelling={handleEditDwelling} // Pass the function to handle updating the dwelling
+            />
+          )}
         </div>
       </div>
     </div>
