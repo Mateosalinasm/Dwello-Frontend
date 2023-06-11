@@ -8,23 +8,33 @@ import Dashboard from "./pages/Dashboard.jsx";
 import Contact from "./components/ContactForm";
 import Show from "./pages/show";
 import Navbar from "./components/Navbar";
+import { Auth0Provider } from "@auth0/auth0-react";
+const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
+const clientId0 = import.meta.env.VITE_AUTH0_CLIENT_ID;
+const clientSecret0 = import.meta.env.VITE_AUTH0_CLIENT_SECRET;
 
 function App() {
   const location = useLocation();
 
   return (
-    <div className="App">
-      {location.pathname !== "/" && <Navbar />}
-      <Routes>
-        <Route path="/" element={<Welcome />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact-us" element={<Contact />} />
-        <Route path="/dwellings" element={<Dwellings />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/dwellings/:propertyId" element={<Show />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <Auth0Provider
+      domain={auth0Domain}
+      clientId={clientId0}
+      redirectUri={`${window.location.origin}/dwellings`}
+    >
+      <div className="App">
+        {location.pathname !== "/" && <Navbar />}
+        <Routes>
+          <Route path="/" element={<Welcome />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact-us" element={<Contact />} />
+          <Route path="/dwellings" element={<Dwellings />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dwellings/:propertyId" element={<Show />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </Auth0Provider>
   );
 }
 

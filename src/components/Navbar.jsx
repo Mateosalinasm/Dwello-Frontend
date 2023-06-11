@@ -1,15 +1,45 @@
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, NavLink } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import "../fonts/fonts.css";
-
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("User picture URL:", user.picture);
+    }
+  }, [isAuthenticated, user]);
+
+  const userIcon = (
+    <Fragment>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="currentColor"
+        stroke="currentColor"
+        className="h-6 w-6"
+      >
+        <path d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    </Fragment>
+  );
+
+  useEffect(() => {
+    console.log("Authentication state changed:", isAuthenticated);
+  }, [isAuthenticated]);
+
   return (
     <Disclosure as="nav" className="fixed z-10 w-full bg-beige shadow">
       {({ open }) => (
@@ -115,11 +145,34 @@ export default function Navbar() {
                   <div>
                     <Menu.Button className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2">
                       <span className="sr-only">Open user menu</span>
-                      <img
+                      {!isAuthenticated ? (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="#F4F1ED"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="#92400e"
+                          className="h-6 w-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                      ) : (
+                        // <p>{user.name}</p>
+                        <img
+                          className="h-8 w-8 rounded-full"
+                          src={user.picture}
+                          alt=""
+                        />
+                      )}
+                      {/* <img
                         className="h-8 w-8 rounded-full"
-                        src="/images/Team/6.png"
+                        src={user.picture}
                         alt=""
-                      />
+                      /> */}
                     </Menu.Button>
                   </div>
                   <Transition
@@ -132,49 +185,74 @@ export default function Navbar() {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/"
-                            onClick={() => window.scrollTo(0, 0)}
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                      {isAuthenticated ? (
+                        // Show user menu items if logged in
+                        <>
+                          {/* <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                to="/"
+                                onClick={() => window.scrollTo(0, 0)}
+                                href="#"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Your Profile
+                              </Link>
                             )}
-                          >
-                            Your Profile
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/"
-                            onClick={() => window.scrollTo(0, 0)}
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                to="/"
+                                onClick={() => window.scrollTo(0, 0)}
+                                href="#"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Settings
+                              </Link>
                             )}
-                          >
-                            Settings
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
+                          </Menu.Item> */}
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                onClick={() =>
+                                  logout({ returnTo: window.location.origin })
+                                }
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Sign out
+                              </Link>
                             )}
-                          >
-                            Sign out
-                          </Link>
-                        )}
-                      </Menu.Item>
+                          </Menu.Item>
+                        </>
+                      ) : (
+                        // Show login prompt if not logged in
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={(e) => {
+                                e.preventDefault();
+                                loginWithRedirect();
+                              }}
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block w-full px-4 py-2 text-left text-sm text-gray-700"
+                              )}
+                            >
+                              Log in
+                            </button>
+                          )}
+                        </Menu.Item>
+                      )}
                     </Menu.Items>
                   </Transition>
                 </Menu>

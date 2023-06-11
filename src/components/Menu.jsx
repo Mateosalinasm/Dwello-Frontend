@@ -7,40 +7,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-// function ParentComponent() {
-//   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-//   const [property, setProperty] = useState({});
-
-//   function handleEditButtonClick() {
-//     setIsEditModalOpen(true);
-//   }
-
-//   function handleCloseEditModal() {
-//     setIsEditModalOpen(false);
-//   }
-
-//   function handleEditDwelling(updatedProperty) {
-//     setProperty(updatedProperty);
-//   }
-
-//   return (
-//     <div>
-//       <DotMenu onEditButtonClick={handleEditButtonClick} />
-//       {isEditModalOpen && (
-//         <EditFormModal
-//           showModal={isEditModalOpen}
-//           onClose={handleCloseEditModal}
-//           property={property}
-//           onEditDwelling={handleEditDwelling} // Pass the function to handle updating the dwelling
-//         />
-//       )}
-//     </div>
-//   );
-// }
-
 export default function DotMenu({ onEditButtonClick, onDeleteButtonClick }) {
   return (
-    <div className="z-10 flex justify-end  leading-6 text-gray-900">
+    <div className="flex justify-end  leading-6 text-gray-900">
       <Menu as="div" className="relative ml-auto">
         <Menu.Button className="-m-2.5 block p-2.5 text-gray-400 hover:text-gray-500">
           <span className="sr-only">Open options</span>

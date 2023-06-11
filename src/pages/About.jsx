@@ -172,7 +172,7 @@ const About = () => {
                   </div>
                 </div>
                 <div className="sm:-mt-33 mt-14 flex justify-end gap-8 sm:justify-center sm:pl-40 lg:mt-0 lg:pl-0">
-                  <div className="mr-auto w-44 flex-none space-y-8 max-sm:gap-4 sm:mr-0 sm:pt-52 lg:pt-20">
+                  <div className="mr-auto w-44 flex-none space-y-8 max-sm:gap-4 sm:mr-0 sm:pt-52 lg:pt-6">
                     <motion.div
                       initial={{ y: "-10%", opacity: 0 }}
                       whileInView={{ y: 0, opacity: 1 }}

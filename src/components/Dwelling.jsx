@@ -9,6 +9,7 @@ import Calendar from "./Calendar";
 import { useNavigate } from "react-router-dom";
 import DotMenu from "./Menu";
 import EditFormModal from "./EditModal";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const dwellingRating = {
   rating: 4,
@@ -22,6 +23,7 @@ export default function Dwelling() {
   const { propertyId } = useParams();
   const [dwelling, setDwelling] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const { isAuthenticated } = useAuth0();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,27 +41,27 @@ export default function Dwelling() {
     fetchDwelling();
   }, [propertyId]);
 
- async function handleDeleteButtonClick() {
-   try {
-     const response = await axios.delete(
-       `https://dwello-backend.vercel.app/dwellings/${propertyId}`
-     );
-     const data = response.data;
-     if (response.status === 200) {
-       console.log(data.message);
-       setDwelling(null);
-       navigate("/dwellings");
-     } else {
-       console.error(data.message);
-     }
-   } catch (error) {
-     console.error("Error while deleting the property:", error);
-   }
- }
+  async function handleDeleteButtonClick() {
+    try {
+      const response = await axios.delete(
+        `https://dwello-backend.vercel.app/dwellings/${propertyId}`
+      );
+      const data = response.data;
+      if (response.status === 200) {
+        console.log(data.message);
+        setDwelling(null);
+        navigate("/dwellings");
+      } else {
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error("Error while deleting the property:", error);
+    }
+  }
 
- if (!dwelling) {
-   return <div>Loading...</div>;
- }
+  if (!dwelling) {
+    return <div>Loading...</div>;
+  }
 
   console.log("Dwelling:", dwelling);
   console.log("Property ID:", propertyId);
@@ -67,7 +69,6 @@ export default function Dwelling() {
     "Endpoint URL:",
     `https://dwello-backend.vercel.app/dwellings/${propertyId}`
   );
-
 
   function handleEditDwelling(updatedDwelling) {
     setDwelling(updatedDwelling);
@@ -137,10 +138,12 @@ export default function Dwelling() {
               <h1 className="text-3xl font-bold tracking-tight text-amber-600">
                 {dwelling.name}
               </h1>
+              {isAuthenticated && (
               <DotMenu
                 onEditButtonClick={handleEditButtonClick}
                 onDeleteButtonClick={handleDeleteButtonClick}
               />
+              )}
             </div>
 
             <div className="mt-3">

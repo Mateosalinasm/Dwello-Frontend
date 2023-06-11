@@ -1,18 +1,18 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import React, { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
-
-
-export default function FormModal({ showModal, onClose, onAddNewDwelling }) {
+export default function FormModal({ showModal, onClose, onAddNewDwelling, onSubmit }) {
   const [features, setFeatures] = useState([]);
   const [propertyImages, setPropertyImages] = useState([]);
+  const { getAccessTokenSilently } = useAuth0();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const accessToken = await getAccessTokenSilently();
 
-    // Create a new property object with form data
     const newProperty = {
       name: event.target.name.value,
       price: event.target.price.value,
@@ -22,10 +22,11 @@ export default function FormModal({ showModal, onClose, onAddNewDwelling }) {
         .split(",")
         .map((feature) => feature.trim()),
       imageSrc: event.target.imageSrc.value,
-      propertyImages: event.target.propertyImages.value.split(",")
+      propertyImages: event.target.propertyImages.value
+        .split(",")
         .map((image) => image.trim()),
     };
-    // Call the API to save the new property
+
     try {
       const response = await axios.post(
         "https://dwello-backend.vercel.app/dwellings",
@@ -33,13 +34,13 @@ export default function FormModal({ showModal, onClose, onAddNewDwelling }) {
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
           },
         }
       );
-
-      // Clear form data and close the modal
       event.target.reset();
       onAddNewDwelling(response.data.data);
+      onSubmit();
       onClose();
     } catch (error) {
       console.error("Error creating property:", error);

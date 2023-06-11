@@ -45,50 +45,6 @@ const primaryFeatures = [
     icon: CalendarDaysIcon,
   },
 ];
-const secondaryFeatures = [
-  {
-    name: "Push to deploy.",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.",
-    icon: CloudArrowUpIcon,
-  },
-  {
-    name: "SSL certificates.",
-    description:
-      "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-    icon: LockClosedIcon,
-  },
-  {
-    name: "Simple queues.",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.",
-    icon: ArrowPathIcon,
-  },
-  {
-    name: "Advanced security.",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.",
-    icon: FingerPrintIcon,
-  },
-  {
-    name: "Powerful API.",
-    description:
-      "Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.",
-    icon: Cog6ToothIcon,
-  },
-  {
-    name: "Database backups.",
-    description:
-      "Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. ",
-    icon: ServerIcon,
-  },
-];
-const stats = [
-  { id: 1, name: "Developers on the platform", value: "8,000+" },
-  { id: 2, name: "Daily requests", value: "900m+" },
-  { id: 3, name: "Uptime guarantee", value: "99.9%" },
-  { id: 4, name: "Projects deployed", value: "12m" },
-];
 
 const h1Variants = {
   visible: { y: 0, opacity: 1, transition: { duration: 1, delay: 0.5 } },
@@ -155,7 +111,7 @@ export default function Dashboard() {
               </motion.div>
             </motion.div>
             <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
-              <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+              <div className="max-w-3xl flex-none sm:max-w-5xl pb-10 lg:max-w-none">
                 <motion.img
                   ref={ref}
                   initial="hidden"
@@ -213,7 +169,7 @@ export default function Dashboard() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.8 + index, duration: 0.2 }}
+                  transition={{ delay: 1, duration: 0.8 }}
                   viewport={{ once: true }}
                   key={feature.name}
                   className="flex flex-col"

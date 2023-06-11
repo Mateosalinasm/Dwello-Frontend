@@ -42,7 +42,7 @@ export default function Contact() {
                     <dd>
                       545 Mavi Ave.
                       <br />
-                      Los Angeles, CA 91608
+                      Turkey, CA 91608
                     </dd>
                   </div>
                   <div className="flex gap-x-4">

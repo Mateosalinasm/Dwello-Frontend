@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Navbar from "../components/Navbar";
 import Skeleton from "@mui/material/Skeleton";
 import Footer from "../components/Footer";
 import Modal from "../components/Modal";
 import FormModal from "../components/NewModal";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Dwellings = () => {
   const [dwellings, setDwellings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const { isAuthenticated, loginWithRedirect, getAccessTokenSilently } =
+    useAuth0();
+    console.log("isAuthenticated:", isAuthenticated);
+
 
   useEffect(() => {
     const fetchDwellings = async () => {
@@ -35,8 +39,21 @@ const Dwellings = () => {
     setShowModal(!showModal);
   };
 
+  const handleFormModalSubmit = () => {
+    toggleModal(); // Close the first modal
+    setSuccessModal(true); // Open the second modal
+  };
+
   const addNewDwelling = (newDwelling) => {
     setDwellings((prevDwellings) => [...prevDwellings, newDwelling]);
+  };
+
+  const handleClick = async () => {
+    if (!isAuthenticated) {
+      await loginWithRedirect();
+    } else {
+      toggleModal();
+    }
   };
 
   return (
@@ -47,18 +64,14 @@ const Dwellings = () => {
             Dwellings
           </h1>
           <div className="flex-shrink-0">
-            <button
-              type="button"
-              className="px-1 "
-              onClick={toggleModal}
-            >
-              <PlusIcon
-                className="block h-9 w-10 text-gray-400 hover:text-amber-500 hover:scale-105 z-10"
-                aria-hidden="true"
-              />
-              {/* <Link to="/dwellings/new">New Dwello</Link> */}
-            </button>
-       
+            {isAuthenticated && (
+              <button type="button" className="px-1" onClick={handleClick}>
+                <PlusIcon
+                  className="z-10 block h-9 w-10 text-gray-400 hover:scale-105 hover:text-amber-500"
+                  aria-hidden="true"
+                />
+              </button>
+            )}
           </div>
         </div>
         <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-8">
@@ -66,10 +79,10 @@ const Dwellings = () => {
             ? Array.from({ length: 4 }).map((_, index) => (
                 <div
                   key={index}
-                  className="bg-beige group relative flex flex-col overflow-hidden"
+                  className="group relative flex flex-col overflow-hidden bg-beige"
                 >
                   <Skeleton variant="rectangular" width="100%" height={240} />
-                  <div className="bg-beige flex flex-1 flex-col space-y-2 rounded border border-amber-800 p-4">
+                  <div className="flex flex-1 flex-col space-y-2 rounded border border-amber-800 bg-beige p-4">
                     <Skeleton variant="text" width="60%" />
                     <Skeleton variant="text" width="40%" />
                     <Skeleton variant="text" width="80%" />
@@ -79,16 +92,16 @@ const Dwellings = () => {
             : dwellings.map((dwelling) => (
                 <div
                   key={dwelling._id}
-                  className="bg-beige group relative flex flex-col overflow-hidden"
+                  className="group relative flex flex-col overflow-hidden bg-beige"
                 >
                   <Link to={`/dwellings/${dwelling._id}`}>
-                    <div className="bg-beige aspect-h-2 aspect-w-3 mb-4 sm:aspect-none group-hover:opacity-80 sm:h-80">
+                    <div className="aspect-h-2 aspect-w-3 mb-4 bg-beige sm:aspect-none group-hover:opacity-80 sm:h-80">
                       <img
                         src={dwelling.imageSrc}
                         className="h-full w-full rounded-md object-cover object-center sm:h-full sm:w-full"
                       />
                     </div>
-                    <div className="bg-beige flex flex-1 flex-col space-y-2 rounded border border-amber-800 p-4">
+                    <div className="flex flex-1 flex-col space-y-2 rounded border border-amber-800 bg-beige p-4">
                       <h3 className="text-sm font-medium text-amber-800">
                         <span aria-hidden="true" className="absolute inset-0" />
                         {dwelling.name}
@@ -111,6 +124,11 @@ const Dwellings = () => {
           showModal={showModal}
           onClose={toggleModal}
           onAddNewDwelling={addNewDwelling}
+          onSubmit={handleFormModalSubmit}
+        />
+        <Modal
+          showModal={successModal}
+          onClose={() => setSuccessModal(false)}
         />
       </div>
       <Footer />
