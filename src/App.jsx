@@ -9,6 +9,7 @@ import Contact from "./components/ContactForm";
 import Show from "./pages/show";
 import Navbar from "./components/Navbar";
 import { Auth0Provider } from "@auth0/auth0-react";
+import BookingDiv from "./components/BookingDiv";
 const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId0 = import.meta.env.VITE_AUTH0_CLIENT_ID;
 const clientSecret0 = import.meta.env.VITE_AUTH0_CLIENT_SECRET;
@@ -23,15 +24,17 @@ function App() {
       redirectUri={`${window.location.origin}/dwellings`}
     >
       <div className="App">
-        {location.pathname !== "/" && <Navbar />}
+        {location.pathname !== "/" && location.pathname !=="/test" && <Navbar />}
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/dwellings" element={<Dwellings />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/test" element={<BookingDiv />} />
           <Route path="/dwellings/:propertyId" element={<Show />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/booking" />
         </Routes>
       </div>
     </Auth0Provider>

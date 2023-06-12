@@ -102,7 +102,7 @@ const Dwellings = () => {
                       />
                     </div>
                     <div className="flex flex-1 flex-col space-y-2 rounded border border-amber-800 bg-beige p-4">
-                      <h3 className="text-sm font-medium text-amber-800">
+                      <h3 className="text-lg font-medium text-amber-800">
                         <span aria-hidden="true" className="absolute inset-0" />
                         {dwelling.name}
                       </h3>
@@ -111,8 +111,8 @@ const Dwellings = () => {
                         <p className="mb-4 text-sm italic text-gray-700">
                           {dwelling.options}
                         </p>
-                        <p className="text-base font-medium text-amber-800">
-                          {dwelling.price}
+                        <p className="text-sm font-medium text-amber-800">
+                          From ${dwelling.price} / night
                         </p>
                       </div>
                     </div>

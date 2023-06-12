@@ -22,6 +22,9 @@ export default function Calendar() {
     startDate: null,
     endDate: null,
   });
+const [checkIn, setCheckIn] = useState('');
+const [checkOut, setCheckOut] = useState('');
+const [numberOfGuests, setNumberOfGuests] = useState(1);
 
 
   const generateCalendarDays = (month) => {
@@ -152,3 +155,4 @@ export default function Calendar() {
     </div>
   );
 }
+

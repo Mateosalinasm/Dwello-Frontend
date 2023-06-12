@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import DotMenu from "./Menu";
 import EditFormModal from "./EditModal";
 import { useAuth0 } from "@auth0/auth0-react";
+import BookingDiv from "./BookingDiv";
 
 const dwellingRating = {
   rating: 4,
@@ -23,7 +24,7 @@ export default function Dwelling() {
   const { propertyId } = useParams();
   const [dwelling, setDwelling] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -82,10 +83,18 @@ export default function Dwelling() {
     setIsEditModalOpen(false);
   }
 
+  function handleBooking() {
+    if(user) {
+
+    } else {
+      loginWithRedirect();
+    }
+  }
+
   return (
     <div className="bg-beige">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+        <div className="max-sm:mt-5 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
             {/* Image selector */}
@@ -135,21 +144,21 @@ export default function Dwelling() {
           {/* Property info */}
           <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
             <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold tracking-tight text-amber-600">
+              <h1 className="text-5xl font-bold tracking-tight text-amber-600">
                 {dwelling.name}
               </h1>
               {isAuthenticated && (
-              <DotMenu
-                onEditButtonClick={handleEditButtonClick}
-                onDeleteButtonClick={handleDeleteButtonClick}
-              />
+                <DotMenu
+                  onEditButtonClick={handleEditButtonClick}
+                  onDeleteButtonClick={handleDeleteButtonClick}
+                />
               )}
             </div>
 
-            <div className="mt-3">
+            <div className="">
               <h2 className="sr-only">Property information</h2>
-              <p className="text-3xl tracking-tight text-gray-600">
-                {dwelling.price}
+              <p className="text-2xl font-thin tracking-tight text-gray-600">
+                <span className="text-xl font-light">{dwelling.options}</span>
               </p>
             </div>
 
@@ -186,7 +195,7 @@ export default function Dwelling() {
               />
             </div>
 
-            <form className="mt-6">
+            {/* <form className="mt-6">
               <div className="mt-10 flex">
                 <button
                   type="submit"
@@ -195,8 +204,8 @@ export default function Dwelling() {
                   Book
                 </button>
               </div>
-            </form>
-
+            </form> */}
+            <BookingDiv property={dwelling} />
             <section aria-labelledby="details-heading" className="mt-12">
               <h2 id="details-heading" className="sr-only">
                 Additional details
@@ -249,6 +258,7 @@ export default function Dwelling() {
                     </>
                   )}
                 </Disclosure>
+
                 <Calendar />
               </div>
             </section>
