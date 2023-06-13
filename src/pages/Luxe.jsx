@@ -130,7 +130,6 @@ const Luxe = () => {
           onClose={() => setSuccessModal(false)}
         />
       </div>
-      <Footer />
     </div>
   );
 };

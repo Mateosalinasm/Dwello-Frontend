@@ -131,7 +131,6 @@ const Dwellings = () => {
           onClose={() => setSuccessModal(false)}
         />
       </div>
-      <Footer />
     </div>
   );
 };

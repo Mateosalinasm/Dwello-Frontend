@@ -454,7 +454,6 @@ const About = () => {
             ))}
           </div>
         </div>
-        <Footer />
       </main>
     </div>
   );

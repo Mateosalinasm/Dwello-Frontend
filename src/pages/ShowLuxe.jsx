@@ -7,7 +7,6 @@ const ShowLuxe = () => {
   return (
     <div>
       <LuxeDwelling />
-      <Footer />
     </div>
   );
 };
