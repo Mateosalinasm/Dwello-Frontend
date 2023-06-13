@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
-import {
-  differenceInCalendarDays,
-} from "date-fns";
+import { differenceInCalendarDays } from "date-fns";
 import axios from "axios";
 import BookingModal from "./BookingModal";
 
@@ -11,7 +9,8 @@ const BookingDiv = ({ property }) => {
   const [checkOut, setCheckOut] = useState("");
   const [numberOfGuests, setNumberOfGuests] = useState(1);
   const [showBookingModal, setShowBookingModal] = useState(false);
-  
+  const [errorMessage, setErrorMessage] = useState("");
+
   let numberOfNights = 0;
   if (checkIn && checkOut) {
     numberOfNights = differenceInCalendarDays(
@@ -20,29 +19,46 @@ const BookingDiv = ({ property }) => {
     );
   }
 
-async function bookDwello() {
-  try {
-    const response = await axios.post("http://localhost:4005/booking", {
-      // id,
-      property: property._id,
-      checkIn,
-      checkOut,
-      numberOfGuests,
-      price: numberOfNights * property.price,
-    });
-    // const bookingId = response.data._id;
-    // console.log(bookingId)
-    setShowBookingModal(true);
-    // onBookingCompleted(bookingId);
-  } catch (error) {
-    console.error("Error:", error); // Log the entire error object
-    // Handle booking error, e.g., show an error message
-  }
-}
+  async function bookDwello() {
+    // Input validation
+    if (new Date(checkIn) < new Date()) {
+      setErrorMessage("Check-in date cannot be in the past");
+      return;
+    }
 
-const handleBookButtonClick = () => {
-  setShowBookingModal(true);
-};
+    if (new Date(checkOut) <= new Date(checkIn)) {
+      setErrorMessage("Check-out date must be after check-in date");
+      return;
+    }
+
+    if (numberOfGuests <= 0) {
+      setErrorMessage("Number of guests must be greater than 0");
+      return;
+    }
+
+    if (numberOfGuests > property.maxGuests) {
+      setErrorMessage("Number of guests exceeds the maximum limit");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        `http://localhost:4005/booking`,
+        {
+          property: property._id,
+          checkIn,
+          checkOut,
+          numberOfGuests,
+          price: numberOfNights * property.price,
+        }
+      );
+
+      setShowBookingModal(true);
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage("Booking failed, please try again");
+    }
+  }
 
   return (
     <div>
@@ -96,6 +112,7 @@ const handleBookButtonClick = () => {
             </div>
           </div>
         </div>
+        {errorMessage && <div className="text-red-500">{errorMessage}</div>}
         <button
           onClick={bookDwello}
           className="mt-4 flex w-full max-w-2xl flex-1 items-center justify-center rounded-md border border-transparent bg-amber-600 px-8 py-3 text-base font-medium text-white hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 "
