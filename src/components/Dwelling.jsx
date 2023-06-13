@@ -90,17 +90,6 @@ export default function Dwelling() {
     setIsEditModalOpen(false);
   }
 
-  function handleBooking() {
-    if(user) {
-
-    } else {
-      loginWithRedirect();
-    }
-  }
-
-  const handleBookingSubmit = () => {
-    setIsBookingModalOpen(true);
-  };
 
   return (
     <div className="bg-beige">

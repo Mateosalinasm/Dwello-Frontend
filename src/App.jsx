@@ -12,7 +12,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import BookingDiv from "./components/BookingDiv";
 import Luxe from "./pages/Luxe";
 import ShowLuxe from "./pages/ShowLuxe";
-import MyBookings from "./pages/MyBookings";
+// import MyBookings from "./pages/MyBookings";
 const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId0 = import.meta.env.VITE_AUTH0_CLIENT_ID;
 // const clientSecret0 = import.meta.env.VITE_AUTH0_CLIENT_SECRET;
