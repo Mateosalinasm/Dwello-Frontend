@@ -11,6 +11,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -23,7 +24,11 @@ export default function Navbar() {
   }, [isAuthenticated]);
 
   return (
-    <Disclosure as="nav" className="fixed z-10 w-full bg-beige shadow">
+    <Disclosure
+      as="nav"
+      className="fixed z-10 w-full bg-beige shadow"
+      open={menuOpen}
+    >
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -175,7 +180,7 @@ export default function Navbar() {
                               <Link
                                 to="/"
                                 onClick={() => window.scrollTo(0, 0)}
-                                href="#"
+                                to="#"
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
@@ -241,52 +246,87 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 pb-4 pt-2">
               {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
-              <Disclosure.Button as="a">
-                <Link
-                  href="dashboard"
-                  className="block border-l-4 border-amber-500 bg-gray-100 py-2 pl-3 pr-4 text-base font-medium text-amber-900"
+              <Disclosure.Button onClick={() => setMenuOpen(!menuOpen)} as="a">
+                <NavLink
+                  to="/dashboard"
+                  onClick={() => window.scrollTo(0, 0)}
+                  className={({ isActive }) =>
+                    `block ${
+                      isActive
+                        ? "border-l-4 border-amber-500 bg-gray-100 text-amber-900"
+                        : "border-l-4 border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                    } py-2 pl-3 pr-4 text-base font-medium`
+                  }
                 >
                   Dashboard
-                </Link>
-              </Disclosure.Button>
-              <Disclosure.Button as="a">
-                <Link
-                  href="dwellings"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                </NavLink>
+                <NavLink
+                  to="/dwellings"
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setMenuOpen(false);
+                  }}
+                  className={({ isActive }) =>
+                    `block ${
+                      isActive
+                        ? "border-l-4 border-amber-500 bg-gray-100 text-amber-900"
+                        : "border-l-4 border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                    } py-2 pl-3 pr-4 text-base font-medium`
+                  }
                 >
                   Dwellings
-                </Link>
-              </Disclosure.Button>
-              <Disclosure.Button as="a">
-                <Link
-                  href="top-rated"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                </NavLink>
+                <NavLink
+                  to="/luxe"
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setMenuOpen(false);
+                  }}
+                  className={({ isActive }) =>
+                    `block ${
+                      isActive
+                        ? "border-l-4 border-amber-500 bg-gray-100 text-amber-900"
+                        : "border-l-4 border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                    } py-2 pl-3 pr-4 text-base font-medium`
+                  }
                 >
-                  Top Rated
-                </Link>
-              </Disclosure.Button>
-              <Disclosure.Button
-                as="a"
-                // className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
-              >
-                <Link
-                  href="about"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                  Luxe
+                </NavLink>
+                <NavLink
+                  to="/about"
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setMenuOpen(false);
+                  }}
+                  className={({ isActive }) =>
+                    `block ${
+                      isActive
+                        ? "border-l-4 border-amber-500 bg-gray-100 text-amber-900"
+                        : "border-l-4 border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                    } py-2 pl-3 pr-4 text-base font-medium`
+                  }
                 >
                   About
-                </Link>
-              </Disclosure.Button>
-              <Disclosure.Button as="a">
-                <Link
-                  href="contact-us"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                </NavLink>
+                <NavLink
+                  to="/contact-us"
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    setMenuOpen(false);
+                  }}
+                  className={({ isActive }) =>
+                    `block ${
+                      isActive
+                        ? "border-l-4 border-amber-500 bg-gray-100 text-amber-900"
+                        : "border-l-4 border-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                    } py-2 pl-3 pr-4 text-base font-medium`
+                  }
                 >
                   Contact Us
-                </Link>
+                </NavLink>
               </Disclosure.Button>
             </div>
           </Disclosure.Panel>

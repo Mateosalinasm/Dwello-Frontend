@@ -6,10 +6,13 @@ import About from "./pages/About.jsx"
 import Dwellings from "./pages/Dwellings.jsx"
 import Dashboard from "./pages/Dashboard.jsx";
 import Contact from "./components/ContactForm";
-import Show from "./pages/show";
+import Show from "./pages/Show";
 import Navbar from "./components/Navbar";
 import { Auth0Provider } from "@auth0/auth0-react";
 import BookingDiv from "./components/BookingDiv";
+import Luxe from "./pages/Luxe";
+import ShowLuxe from "./pages/ShowLuxe";
+// import MyBookings from "./pages/MyBookings";
 const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId0 = import.meta.env.VITE_AUTH0_CLIENT_ID;
 const clientSecret0 = import.meta.env.VITE_AUTH0_CLIENT_SECRET;
@@ -24,17 +27,22 @@ function App() {
       redirectUri={`${window.location.origin}/dwellings`}
     >
       <div className="App">
-        {location.pathname !== "/" && location.pathname !=="/test" && <Navbar />}
+        {location.pathname !== "/" && location.pathname !== "/test" && (
+          <Navbar />
+        )}
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/about" element={<About />} />
+          <Route path="/luxe" element={<Luxe />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/dwellings" element={<Dwellings />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/test" element={<BookingDiv />} />
           <Route path="/dwellings/:propertyId" element={<Show />} />
+          <Route path="/dwellings/luxe/:propertyId" element={<ShowLuxe />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/booking" />
+          {/* <Route path="/booking" /> */}
+          {/* <Route path="/my-bookings/:bookingId" component={MyBookings} /> */}
         </Routes>
       </div>
     </Auth0Provider>

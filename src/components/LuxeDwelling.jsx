@@ -11,6 +11,7 @@ import DotMenu from "./Menu";
 import EditFormModal from "./EditModal";
 import { useAuth0 } from "@auth0/auth0-react";
 import BookingDiv from "./BookingDiv";
+import LuxeEditModal from "./LuxeEditModal";
 
 const dwellingRating = {
   rating: 4,
@@ -20,7 +21,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Dwelling() {
+export default function LuxeDwelling() {
   const { propertyId } = useParams();
   const [dwelling, setDwelling] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -33,7 +34,7 @@ export default function Dwelling() {
     const fetchDwelling = async () => {
       try {
         const response = await axios.get(
-          `https://dwello-backend.vercel.app/dwellings/${propertyId}`
+          `http://localhost:4005/dwellings/luxe/${propertyId}`
         );
         setDwelling(response.data.data);
       } catch (error) {
@@ -48,11 +49,10 @@ export default function Dwelling() {
   //    setBookingId(id);
   //  };
 
-
   async function handleDeleteButtonClick() {
     try {
       const response = await axios.delete(
-        `https://dwello-backend.vercel.app/dwellings/${propertyId}`
+        `http://localhost:4005/dwellings/luxe/${propertyId}`
       );
       const data = response.data;
       if (response.status === 200) {
@@ -91,8 +91,7 @@ export default function Dwelling() {
   }
 
   function handleBooking() {
-    if(user) {
-
+    if (user) {
     } else {
       loginWithRedirect();
     }
@@ -275,7 +274,7 @@ export default function Dwelling() {
             </section>
           </div>
           {isEditModalOpen && (
-            <EditFormModal
+            <LuxeEditModal
               showModal={isEditModalOpen}
               onClose={handleCloseEditModal}
               property={dwelling}

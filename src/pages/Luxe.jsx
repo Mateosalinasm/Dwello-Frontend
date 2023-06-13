@@ -7,11 +7,12 @@ import Modal from "../components/Modal";
 import FormModal from "../components/NewModal";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useAuth0 } from "@auth0/auth0-react";
+import LuxeModal from "../components/NewLuxe";
 
-const Dwellings = () => {
+const Luxe = () => {
   const [dwellings, setDwellings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
+  const [showLuxeModal, setShowLuxeModal] = useState(false);
   const [successModal, setSuccessModal] = useState(false);
   const { isAuthenticated, loginWithRedirect, getAccessTokenSilently } =
     useAuth0();
@@ -20,9 +21,7 @@ const Dwellings = () => {
   useEffect(() => {
     const fetchDwellings = async () => {
       try {
-        const response = await axios.get(
-          `https://dwello-backend.vercel.app/dwellings`
-        );
+        const response = await axios.get(`http://localhost:4005/dwellings/luxe`);
         console.log(response);
         setDwellings(response.data.data);
         setLoading(false);
@@ -35,7 +34,7 @@ const Dwellings = () => {
   }, []);
 
   const toggleModal = () => {
-    setShowModal(!showModal);
+    setShowLuxeModal(!showLuxeModal);
   };
 
   const handleFormModalSubmit = () => {
@@ -59,8 +58,8 @@ const Dwellings = () => {
     <div className="bg-beige">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <div className="flex flex-row items-center justify-between">
-          <h1 className="mb-10 mt-5 text-5xl font-bold tracking-tight text-amber-500 sm:text-6xl">
-            Dwellings
+          <h1 className="kaushan mb-10 mt-5 text-5xl font-bold tracking-tight text-amber-500 sm:text-7xl">
+            Luxe
           </h1>
           <div className="flex-shrink-0">
             {isAuthenticated && (
@@ -93,7 +92,7 @@ const Dwellings = () => {
                   key={dwelling._id}
                   className="group relative flex flex-col overflow-hidden bg-beige"
                 >
-                  <Link to={`/dwellings/${dwelling._id}`}>
+                  <Link to={`/dwellings/luxe/${dwelling._id}`}>
                     <div className="aspect-h-2 aspect-w-3 mb-4 bg-beige sm:aspect-none group-hover:opacity-80 sm:h-80">
                       <img
                         loading="lazy"
@@ -120,8 +119,8 @@ const Dwellings = () => {
                 </div>
               ))}
         </div>
-        <FormModal
-          showModal={showModal}
+        <LuxeModal
+          showModal={showLuxeModal}
           onClose={toggleModal}
           onAddNewDwelling={addNewDwelling}
           onSubmit={handleFormModalSubmit}
@@ -136,4 +135,4 @@ const Dwellings = () => {
   );
 };
 
-export default Dwellings;
+export default Luxe;

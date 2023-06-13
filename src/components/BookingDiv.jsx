@@ -1,20 +1,16 @@
 import React, { useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import {
-  format,
-  startOfMonth,
-  endOfMonth,
-  eachDayOfInterval,
-  isSameMonth,
-  isToday,
   differenceInCalendarDays,
 } from "date-fns";
 import axios from "axios";
+import BookingModal from "./BookingModal";
 
 const BookingDiv = ({ property }) => {
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [numberOfGuests, setNumberOfGuests] = useState(1);
+  const [showBookingModal, setShowBookingModal] = useState(false);
   
   let numberOfNights = 0;
   if (checkIn && checkOut) {
@@ -27,19 +23,26 @@ const BookingDiv = ({ property }) => {
 async function bookDwello() {
   try {
     const response = await axios.post("http://localhost:4005/booking", {
+      // id,
       property: property._id,
       checkIn,
       checkOut,
       numberOfGuests,
       price: numberOfNights * property.price,
     });
-    const bookingId = response.data._id;
-    console.log(response)
+    // const bookingId = response.data._id;
+    // console.log(bookingId)
+    setShowBookingModal(true);
+    // onBookingCompleted(bookingId);
   } catch (error) {
     console.error("Error:", error); // Log the entire error object
     // Handle booking error, e.g., show an error message
   }
 }
+
+const handleBookButtonClick = () => {
+  setShowBookingModal(true);
+};
 
   return (
     <div>
@@ -110,6 +113,10 @@ async function bookDwello() {
           ) : (
             <></>
           )}
+          <BookingModal
+            showBookingModal={showBookingModal}
+            onClose={() => setShowBookingModal(false)}
+          />
         </div>
       </div>
     </div>
