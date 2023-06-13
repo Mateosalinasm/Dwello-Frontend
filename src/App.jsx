@@ -11,9 +11,10 @@ import Navbar from "./components/Navbar";
 import { Auth0Provider } from "@auth0/auth0-react";
 import BookingDiv from "./components/BookingDiv";
 import Luxe from "./pages/Luxe.jsx";
-import ShowLuxe from "./pages/ShowLuxe.jsx";
+// import ShowLuxe from "./pages/ShowLuxe.jsx";
 import Dwelling from "./components/Dwelling";
 import Footer from "./components/Footer";
+import LuxeDwelling from "./components/LuxeDwelling";
 // import MyBookings from "./pages/MyBookings";
 const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId0 = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -41,7 +42,10 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/test" element={<BookingDiv />} />
           <Route path="/dwellings/:propertyId" element={<Dwelling />} />
-          <Route path="/dwellings/luxe/:propertyId" element={<ShowLuxe />} />
+          <Route
+            path="/dwellings/luxe/:propertyId"
+            element={<LuxeDwelling />}
+          />
           <Route path="*" element={<NotFound />} />
           {/* <Route path="/booking" /> */}
           {/* <Route path="/my-bookings/:bookingId" component={MyBookings} /> */}

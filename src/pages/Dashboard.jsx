@@ -102,7 +102,7 @@ export default function Dashboard() {
               </motion.p>
               <motion.div className="mt-10 flex items-center gap-x-6">
                 <Link
-                  to="/top-rated"
+                  to="/luxe"
                   onClick={() => window.scrollTo(0, 0)}
                   className="bg-mute-green rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-lime-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-500"
                 >
