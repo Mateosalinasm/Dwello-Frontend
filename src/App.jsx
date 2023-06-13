@@ -6,12 +6,12 @@ import About from "./pages/About.jsx"
 import Dwellings from "./pages/Dwellings.jsx"
 import Dashboard from "./pages/Dashboard.jsx";
 import Contact from "./components/ContactForm";
-import Show from "./pages/Show";
+import Show from "./pages/Show.jsx";
 import Navbar from "./components/Navbar";
 import { Auth0Provider } from "@auth0/auth0-react";
 import BookingDiv from "./components/BookingDiv";
-import Luxe from "./pages/Luxe";
-import ShowLuxe from "./pages/ShowLuxe";
+import Luxe from "./pages/Luxe.jsx";
+import ShowLuxe from "./pages/ShowLuxe.jsx";
 // import MyBookings from "./pages/MyBookings";
 const auth0Domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId0 = import.meta.env.VITE_AUTH0_CLIENT_ID;
