@@ -33,7 +33,7 @@ export default function Dwelling() {
     const fetchDwelling = async () => {
       try {
         const response = await axios.get(
-          `https://dwello-backend.vercel.app/dwellings/${propertyId}`
+          `http://localhost:4005/dwellings/${propertyId}`
         );
         setDwelling(response.data.data);
       } catch (error) {
@@ -52,7 +52,7 @@ export default function Dwelling() {
   async function handleDeleteButtonClick() {
     try {
       const response = await axios.delete(
-        `https://dwello-backend.vercel.app/dwellings/${propertyId}`
+        `http://localhost:4005/dwellings/${propertyId}`
       );
       const data = response.data;
       if (response.status === 200) {
@@ -60,7 +60,7 @@ export default function Dwelling() {
         setDwelling(null);
         navigate("/dwellings");
       } else {
-        console.error(data.message);
+        console.error("This is the error",data.message);
       }
     } catch (error) {
       console.error("Error while deleting the property:", error);
@@ -73,10 +73,7 @@ export default function Dwelling() {
 
   console.log("Dwelling:", dwelling);
   console.log("Property ID:", propertyId);
-  console.log(
-    "Endpoint URL:",
-    `https://dwello-backend.vercel.app/dwellings/${propertyId}`
-  );
+  console.log("Endpoint URL:", `http://localhost:4005/dwellings/${propertyId}`);
 
   function handleEditDwelling(updatedDwelling) {
     setDwelling(updatedDwelling);

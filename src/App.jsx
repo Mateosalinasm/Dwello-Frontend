@@ -50,7 +50,9 @@ function App() {
           {/* <Route path="/booking" /> */}
           {/* <Route path="/my-bookings/:bookingId" component={MyBookings} /> */}
         </Routes>
-        <Footer />
+        {location.pathname !== "/" && location.pathname !== "/test" && (
+          <Footer />
+        )}
       </div>
     </Auth0Provider>
   );

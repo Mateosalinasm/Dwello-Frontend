@@ -4,24 +4,7 @@ import { useInView } from "react-intersection-observer";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
-const phoneVariants = {
-  visible: { x: 0, opacity: 1, transition: { duration: 1.4, delay: 0.5 } },
-  hidden: { x: "100%", opacity: 0 },
-};
 
-const imgVariants = {
-  visible: { y: 0, opacity: 1, transition: { duration: 1.4, delay: 0.3 } },
-  hidden: { y: "-10%", opacity: 0 },
-};
-
-const textVariants = {
-  visible: { x: 0, opacity: 1, transition: { duration: 1.4, delay: 0.6 } },
-  hidden: { x: "-100%", opacity: 0 },
-};
-const h1Variants = {
-  visible: { x: 0, opacity: 1, transition: { duration: 1.4, delay: 0.4 } },
-  hidden: { x: "-100%", opacity: 0 },
-};
 const stats = [
   { label: "Dwello's Global Presence", value: "7 Continents" },
   { label: "Premier Travel Destinations", value: "20 Exquisite Cities" },
@@ -84,16 +67,48 @@ const team = [
 const blogPosts = [
   {
     id: 1,
-    title: "Vel expedita assumenda placeat aut nisi optio voluptates quas",
-    href: "#",
+    title: "Travel Bucket List for 2023",
+    href: "https://www.theblondeabroad.com/travel-bucket-list-for-2023/",
     description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
+      "Every year, I like to put together a “travel bucket list” with inspiration for the coming year…a mood board for adventures, if you will. In taking a look at Expedia’s travel trends for 2023, it was really fun to see that so many of our thoughts about travel line up. ",
     imageUrl:
-      "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
+      "https://www.theblondeabroad.com/wp-content/uploads/2023/01/2022111518010489-4599939709005184162-.jpg",
+    date: "Mar 15, 2023",
+    datetime: "2023-03-15",
     author: {
-      name: "Michael Foster",
+      name: "Kiki",
+      imageUrl:
+        "https://www.theblondeabroad.com/wp-content/uploads/2019/11/top-of-the-rock-new-york-city.jpg",
+    },
+  },
+  {
+    id: 1,
+    title: "6x Unique Eco-friendly Hotels Around the World",
+    href: "https://www.saltinourhair.com/sustainability/eco-friendly-hotels/",
+    description:
+      "Wake up to the sound of a waterfall in Bali or monkeys in Costa Rica by spending the night close to nature at an eco-friendly hotel. Finding a special accommodation that also contributes to a healthy environment can sometimes be a challenge. However, it is possible to leave a smaller ecological footprint while traveling by choosing sustainable accommodation. Anne-Floor from slow travel platform Honeyguide is happy to share her 6 favorite extraordinary eco-friendly hotels—all offering you a greener stay.",
+    imageUrl:
+      "https://static.saltinourhair.com/wp-content/uploads/2022/12/13092735/Sebatu-Sanctuary-Eco-resort-1.jpg",
+    date: "June 10, 2023",
+    datetime: "2023-06-10",
+    author: {
+      name: "Hannah & Nick",
+      imageUrl:
+        "https://static.saltinourhair.com/build/images/kofi-block-image.png",
+    },
+  },
+  {
+    id: 1,
+    title: "How to Become A Digital Nomad In Bali",
+    href: "https://lostleblanc.com/blogs/news/bali-digital-nomad",
+    description:
+      "Ever wondered if you could become a digital nomad by making money online? I want to show you what the digital nomad lifestyle might look like in a place like Bali Indonesia and you can decide after if it’s something you could ever see yourself doing.",
+    imageUrl:
+      "https://cdn.shopify.com/s/files/1/1639/2777/files/Lost_LeBlanc_on_laptop_at_Tumpak_Sewu_Waterfall_in_East_Java_Indonesia.png?v=1581564361",
+    date: "Jan 3, 2023",
+    datetime: "2023-01-03",
+    author: {
+      name: "Lost Leblanc",
       imageUrl:
         "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
     },
@@ -156,7 +171,7 @@ const About = () => {
                       whileInView={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.5, duration: 0.7 }}
                       viewport={{ once: true }}
-                      className="text-lg relative  mt-6 leading-8 text-gray-700 sm:max-w-md lg:max-w-none"
+                      className="relative mt-6  text-lg leading-8 text-gray-700 sm:max-w-md lg:max-w-none"
                     >
                       At Dwello, we're revolutionizing the way people travel. By
                       providing a platform that connects travelers with unique
@@ -333,34 +348,64 @@ const About = () => {
         {/* Values section */}
         <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl">
+            <motion.h2
+              initial={{ y: "-10%", opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              viewport={{ once: true }}
+              className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl"
+            >
               Our Values
-            </h2>
-            <p className="text-lg mt-6 leading-8 text-gray-700">
+            </motion.h2>
+            <motion.p
+              initial={{ y: "-10%", opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.8, duration: 1 }}
+              viewport={{ once: true }}
+              className="mt-6 text-lg leading-8 text-gray-700"
+            >
               We believe that travel accommodations are just as significant as
               the other activities you engage in during your journey. That's why
               we are committed to curating extraordinary accommodations that
               will make your next stay truly unforgettable and worthy of a
               scrapbook filled with cherished memories.
-            </p>
+            </motion.p>
           </div>
-          <dl className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base leading-7 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <motion.dl
+            initial={{ y: "-10%", opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ delay: 2, duration: 1 }}
+            viewport={{ once: true }}
+            className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base leading-7 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+          >
             {values.map((value) => (
               <div key={value.name}>
                 <dt className="font-semibold text-amber-700">{value.name}</dt>
                 <dd className="mt-1 text-gray-700">{value.description}</dd>
               </div>
             ))}
-          </dl>
+          </motion.dl>
         </div>
 
         {/* Team section */}
         <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-48 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0">
-            <h2 className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl">
+            <motion.h2
+              initial={{ y: "-15%", opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.9, duration: 1 }}
+              viewport={{ once: true }}
+              className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl"
+            >
               Our Team
-            </h2>
-            <p className="text-lg mt-6 leading-8 text-gray-700">
+            </motion.h2>
+            <motion.p
+              initial={{ y: "-10%", opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 2.5, duration: 1 }}
+              viewport={{ once: true }}
+              className="mt-6 text-lg leading-8 text-gray-700"
+            >
               Meet the brilliant team behind Dwello! With Mateo as the driving
               force of our development efforts, his exceptional expertise in
               front-end and back-end development has brought the project to
@@ -375,9 +420,13 @@ const About = () => {
               truly immersive and unforgettable travel platform. When not
               immersed in their respective roles, you can find the team members
               enjoying a nice hike.
-            </p>
+            </motion.p>
           </div>
-          <ul
+          <motion.ul
+            initial={{ y: "20%", opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ delay: 1.9, duration: 1 }}
+            viewport={{ once: true }}
             role="list"
             className="mx-auto mt-20 flex max-w-2xl grid-cols-2 flex-wrap justify-center gap-x-14 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 lg:mx-0 lg:max-w-none lg:grid-cols-5 xl:grid-cols-6"
           >
@@ -396,20 +445,38 @@ const About = () => {
                 </p>
               </li>
             ))}
-          </ul>
+          </motion.ul>
         </div>
 
         {/* Blog section */}
         <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8">
           <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-none">
-            <h2 className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl">
+            <motion.h2
+              initial={{ y: "-10%", opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              viewport={{ once: true }}
+              className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl"
+            >
               From the blog
-            </h2>
-            <p className="text-lg mt-2 leading-8 text-gray-700">
+            </motion.h2>
+            <motion.p
+              initial={{ y: "-10%", opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 2, duration: 1 }}
+              viewport={{ once: true }}
+              className="mt-2 text-lg leading-8 text-gray-700"
+            >
               Get ready for your next trip with these travel blogs!
-            </p>
+            </motion.p>
           </div>
-          <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <motion.div
+            initial={{ y: "20%", opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ delay: 2.4, duration: 1 }}
+            viewport={{ once: true }}
+            className="mx-auto mt-16 mb-12 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+          >
             {blogPosts.map((post) => (
               <article
                 key={post.id}
@@ -444,7 +511,7 @@ const About = () => {
                     </div>
                   </div>
                 </div>
-                <h3 className="text-lg mt-3 font-semibold leading-6 text-white">
+                <h3 className="mt-3 text-lg font-semibold leading-6 text-white">
                   <a href={post.href}>
                     <span className="absolute inset-0" />
                     {post.title}
@@ -452,7 +519,7 @@ const About = () => {
                 </h3>
               </article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </main>
     </div>

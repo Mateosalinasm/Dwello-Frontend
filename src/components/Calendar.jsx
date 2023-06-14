@@ -10,7 +10,6 @@ import {
 } from "date-fns";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -22,10 +21,9 @@ export default function Calendar() {
     startDate: null,
     endDate: null,
   });
-const [checkIn, setCheckIn] = useState('');
-const [checkOut, setCheckOut] = useState('');
-const [numberOfGuests, setNumberOfGuests] = useState(1);
-
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [numberOfGuests, setNumberOfGuests] = useState(1);
 
   const generateCalendarDays = (month) => {
     const start = startOfMonth(month);
@@ -83,7 +81,6 @@ const [numberOfGuests, setNumberOfGuests] = useState(1);
     return day >= bookingDates.startDate && day <= bookingDates.endDate;
   };
 
-
   return (
     <div>
       <div className="">
@@ -109,7 +106,7 @@ const [numberOfGuests, setNumberOfGuests] = useState(1);
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
             </button>
           </div>
-          <div className="text-xs mt-6 grid grid-cols-7 leading-6 text-gray-500">
+          <div className="mt-6 grid grid-cols-7 text-xs leading-6 text-gray-500">
             <div>M</div>
             <div>T</div>
             <div>W</div>
@@ -155,4 +152,3 @@ const [numberOfGuests, setNumberOfGuests] = useState(1);
     </div>
   );
 }
-

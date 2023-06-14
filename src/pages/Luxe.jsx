@@ -26,7 +26,7 @@ const Luxe = () => {
         setDwellings(response.data.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching dwellings data:", error);
+        console.error("Error fetching Luxe data:", error);
       }
     };
 
@@ -46,13 +46,17 @@ const Luxe = () => {
     setDwellings((prevDwellings) => [...prevDwellings, newDwelling]);
   };
 
-  const handleClick = async () => {
-    if (!isAuthenticated) {
-      await loginWithRedirect();
-    } else {
-      toggleModal();
-    }
-  };
+   const handleClick = async () => {
+     try {
+       if (!isAuthenticated) {
+         await loginWithRedirect();
+       } else {
+         toggleModal();
+       }
+     } catch (err) {
+       console.error("Error in handleClick:", err);
+     }
+   };
 
   return (
     <div className="bg-beige">

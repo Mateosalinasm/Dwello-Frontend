@@ -93,7 +93,7 @@ export default function Dashboard() {
                 Welcome to <br />
                 Dwello
               </motion.h1>
-              <motion.p className="text-lg mt-6 leading-8 text-gray-600">
+              <motion.p className="mt-6 text-lg leading-8 text-gray-600">
                 Explore the world with Dwello, the innovative travel platform
                 offering unique accommodations curated for extraordinary
                 adventures. Discover quality, comfort, and safety in every stay.
@@ -111,7 +111,7 @@ export default function Dashboard() {
               </motion.div>
             </motion.div>
             <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
-              <div className="max-w-3xl flex-none sm:max-w-5xl pb-10 lg:max-w-none">
+              <div className="max-w-3xl flex-none pb-10 sm:max-w-5xl lg:max-w-none">
                 <motion.img
                   ref={ref}
                   initial="hidden"
@@ -199,15 +199,21 @@ export default function Dashboard() {
             </dl>
           </div>
         </div>
-        < TravelImages />
+        <TravelImages />
         {/* Feature section */}
         <div className="mt-32 sm:mt-56">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl sm:text-center">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1.5 }}
+              viewport={{ once: true }}
+              className="mx-auto max-w-2xl sm:text-center"
+            >
               <h2 className="text-4xl font-bold text-amber-600 sm:text-4xl">
                 Breathtaking destinations across the globe
               </h2>
-            </div>
+            </motion.div>
           </div>
           <div className="relative  pt-16">
             <div className="mx-auto w-screen ">
@@ -225,7 +231,7 @@ export default function Dashboard() {
                 <div className="absolute -inset-x-20 bottom-0 bg-gradient-to-t from-beige pt-[8%]" />
               </div>
               <div className="mx-auto max-w-2xl sm:text-center">
-                <p className="text-lg mx-auto mt-6 leading-8 text-amber-400">
+                <p className="mx-auto mt-6 text-lg leading-8 text-amber-400">
                   Experience Đắk Ya, Gia Lai, Vietnam like this
                 </p>
               </div>
@@ -253,13 +259,25 @@ export default function Dashboard() {
         {/* CTA section */}
         <div className="relative isolate mt-10 px-6 py-10 sm:mt-40 sm:pb-72 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl">
+            <motion.h2
+              initial={{ y: "20%", opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1, duration: 1 }}
+              viewport={{ once: true }}
+              className="text-3xl font-bold tracking-tight text-amber-600 sm:text-4xl"
+            >
               Don't dwell on the possibilities
               <br />
               Elevate your stay today
-            </h2>
-           
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            </motion.h2>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1 }}
+              viewport={{ once: true }}
+              className="mt-10 flex items-center justify-center gap-x-6"
+            >
               <Link
                 to="/dwellings"
                 onClick={() => window.scrollTo(0, 0)}
@@ -267,7 +285,7 @@ export default function Dashboard() {
               >
                 Check out our Dwellings
               </Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </main>

@@ -20,9 +20,7 @@ const Dwellings = () => {
   useEffect(() => {
     const fetchDwellings = async () => {
       try {
-        const response = await axios.get(
-          `https://dwello-backend.vercel.app/dwellings`
-        );
+        const response = await axios.get(`http://localhost:4005/dwellings`);
         console.log(response);
         setDwellings(response.data.data);
         setLoading(false);
@@ -48,10 +46,14 @@ const Dwellings = () => {
   };
 
   const handleClick = async () => {
-    if (!isAuthenticated) {
-      await loginWithRedirect();
-    } else {
-      toggleModal();
+    try {
+      if (!isAuthenticated) {
+        await loginWithRedirect();
+      } else {
+        toggleModal();
+      }
+    } catch (err) {
+      console.error("Error in handleClick:", err);
     }
   };
 
