@@ -34,7 +34,7 @@ export default function EditFormModal({
 
       try {
         const response = await axios.put(
-          `http://localhost:4005/dwellings/${property._id}`,
+          `https://dwello-backend.vercel.app/dwellings/${property._id}`,
           updatedProperty,
           {
             headers: {

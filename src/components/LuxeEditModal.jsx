@@ -34,7 +34,7 @@ export default function LuxeEditModal({
 
     try {
       const response = await axios.put(
-        `http://localhost:4005/dwellings/luxe/${property._id}`,
+        `https://dwello-backend.vercel.app/dwellings/luxe/${property._id}`,
         updatedProperty,
         {
           headers: {

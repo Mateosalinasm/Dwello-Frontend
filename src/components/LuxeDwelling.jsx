@@ -34,7 +34,7 @@ export default function LuxeDwelling() {
     const fetchDwelling = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4005/dwellings/luxe/${propertyId}`
+          `https://dwello-backend.vercel.app/dwellings/luxe/${propertyId}`
         );
         setDwelling(response.data.data);
       } catch (error) {
@@ -52,7 +52,7 @@ export default function LuxeDwelling() {
   async function handleDeleteButtonClick() {
     try {
       const response = await axios.delete(
-        `http://localhost:4005/dwellings/luxe/${propertyId}`
+        `https://dwello-backend.vercel.app/dwellings/luxe/${propertyId}`
       );
       const data = response.data;
       if (response.status === 200) {

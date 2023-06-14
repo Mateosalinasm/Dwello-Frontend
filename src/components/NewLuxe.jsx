@@ -34,7 +34,7 @@ export default function LuxeModal({
 
     try {
       const response = await axios.post(
-        "http://localhost:4005/dwellings/luxe",
+        "https://dwello-backend.vercel.app/dwellings/luxe",
         newProperty, // Pass newProperty as the second argument
         {
           headers: {

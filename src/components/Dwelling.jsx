@@ -52,7 +52,7 @@ export default function Dwelling() {
   async function handleDeleteButtonClick() {
     try {
       const response = await axios.delete(
-        `http://localhost:4005/dwellings/${propertyId}`
+        `https://dwello-backend.vercel.app/dwellings/${propertyId}`
       );
       const data = response.data;
       if (response.status === 200) {
@@ -73,7 +73,10 @@ export default function Dwelling() {
 
   console.log("Dwelling:", dwelling);
   console.log("Property ID:", propertyId);
-  console.log("Endpoint URL:", `http://localhost:4005/dwellings/${propertyId}`);
+  console.log(
+    "Endpoint URL:",
+    `https://dwello-backend.vercel.app/dwellings/${propertyId}`
+  );
 
   function handleEditDwelling(updatedDwelling) {
     setDwelling(updatedDwelling);

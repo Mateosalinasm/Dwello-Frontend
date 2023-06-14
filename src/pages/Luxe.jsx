@@ -21,7 +21,9 @@ const Luxe = () => {
   useEffect(() => {
     const fetchDwellings = async () => {
       try {
-        const response = await axios.get(`http://localhost:4005/dwellings/luxe`);
+        const response = await axios.get(
+          `https://dwello-backend.vercel.app//dwellings/luxe`
+        );
         console.log(response);
         setDwellings(response.data.data);
         setLoading(false);

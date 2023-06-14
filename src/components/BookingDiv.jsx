@@ -43,7 +43,7 @@ const BookingDiv = ({ property }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:4005/booking`,
+        `https://dwello-backend.vercel.app/booking`,
         {
           property: property._id,
           checkIn,
