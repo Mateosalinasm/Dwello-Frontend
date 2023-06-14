@@ -21,7 +21,7 @@ const Dwellings = () => {
     const fetchDwellings = async () => {
       try {
         const response = await axios.get(
-          `https://dwello-backend.vercel.app//dwellings`
+          `https://dwello-backend.vercel.app/dwellings`
         );
         console.log(response);
         setDwellings(response.data.data);

@@ -22,7 +22,7 @@ const Luxe = () => {
     const fetchDwellings = async () => {
       try {
         const response = await axios.get(
-          `https://dwello-backend.vercel.app//dwellings/luxe`
+          `https://dwello-backend.vercel.app/dwellings/luxe`
         );
         console.log(response);
         setDwellings(response.data.data);

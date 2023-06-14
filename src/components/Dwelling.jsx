@@ -33,7 +33,7 @@ export default function Dwelling() {
     const fetchDwelling = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4005/dwellings/${propertyId}`
+          `https://dwello-backend.vercel.app/dwellings/${propertyId}`
         );
         setDwelling(response.data.data);
       } catch (error) {
